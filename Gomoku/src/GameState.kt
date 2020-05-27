@@ -1,0 +1,1 @@
+class GameState(val board: Board, val expectedToken: Token)
