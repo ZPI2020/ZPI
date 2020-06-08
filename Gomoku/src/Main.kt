@@ -1,41 +1,47 @@
 import java.awt.Color
 
 fun main() {
-    val gameAssistant = GomokuAssistant()
-    val player1 = gameAssistant.addAIPlayer("AI_1")
-    val player2 = gameAssistant.addHumanPlayer("Kuba")
-    val player2Register = gameAssistant.setUpNewGameRegister()
+    val token1 = Token(Color.RED)
+    val token2 = Token(Color.BLUE)
+    val board = Board(10,10)
+    val game = Gomoku(board, token1, token2, firstTurn = token1)
+    val player1 = HumanPlayer("Kuba").also { it.assign(token1); it.play(game) }
+    val player2 = AIPlayer("AI").also { it.assign(token2); it.play(game) }
+    val register = GameStateRegister(game)
 
-    gameAssistant.createNewBoard(10, 10)
-    gameAssistant.startGame(Turn.PLAYER2_TURN)
+    register.saveState()
+    player1.makeMove(0,0)
+    register.saveState()
+    player2.makeMove()
 
-    player1?.makeMove()
-    player2Register.saveState()
-    player2?.makeMove(0, 0)
-    printBoard(gameAssistant.getBoardCopy())
+    register.saveState()
+    player1.makeMove(0,1)
+    register.saveState()
+    player2.makeMove()
 
-    player1?.makeMove()
-    player2Register.saveState()
-    player2?.makeMove(0, 1)
-    printBoard(gameAssistant.getBoardCopy())
+    register.saveState()
+    player1.makeMove(0,2)
+    register.saveState()
+    player2.makeMove()
 
-    player1?.makeMove()
-    player2Register.saveState()
-    player2?.makeMove(0, 2)
-    printBoard(gameAssistant.getBoardCopy())
+    register.saveState()
+    player1.makeMove(0,3)
+    register.saveState()
+    player2.makeMove()
 
-    player2Register.recoverLastState()
-    print("\n***")
-    printBoard(gameAssistant.getBoardCopy())
-    println("***")
+    register.recoverLastState()
 
-    player1?.makeMove()
-    player2?.makeMove(0, 3)
-    printBoard(gameAssistant.getBoardCopy())
+    register.saveState()
+    player1.makeMove(0,4)
+    register.saveState()
+    player2.makeMove()
 
-    player1?.makeMove()
-    player2?.makeMove(0, 4)
-    printBoard(gameAssistant.getBoardCopy())
+    register.saveState()
+    player1.makeMove(0,5)
+    register.saveState()
+    player2.makeMove()
+
+    printBoard(game.getGameBoardCopy())
 }
 
 fun printBoard(board: Board?) {

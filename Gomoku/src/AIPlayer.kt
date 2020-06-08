@@ -1,13 +1,15 @@
 import kotlin.math.roundToInt
 
-class AIPlayer(playerName: String = "AI", game:MetaGame, token: Token): Player(playerName, game, token) {
+class AIPlayer(playerName: String = "AI"): Player(playerName) {
     fun makeMove() {
+        val checkGame = this.game ?: return
+        val checkToken = this.token ?: return
         val (row, column) = findBestMove() ?: return
-        game.placeToken(token, row, column)
+        checkGame.placeToken(checkToken, row, column)
     }
 
     private fun findBestMove(): Pair<Int, Int>? {
-        val board = game.getBoardCopy() ?: return null
+        val board = game?.getGameBoardCopy() ?: return null
         var row: Int
         var column: Int
         do {

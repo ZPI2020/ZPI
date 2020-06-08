@@ -1,5 +1,7 @@
-class HumanPlayer(playerName: String, game:MetaGame, token: Token): Player(playerName, game, token) {
+class HumanPlayer(playerName: String): Player(playerName) {
     fun makeMove(row: Int, column: Int) {
-        this.game.placeToken(token, row, column)
+        val checkGame = this.game ?: return
+        val checkToken = this.token ?: return
+        checkGame.placeToken(checkToken, row, column)
     }
 }

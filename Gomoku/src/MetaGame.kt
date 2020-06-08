@@ -1,45 +1,29 @@
-abstract class MetaGame {
+abstract class MetaGame(
+    protected var board: Board,
+    private val token1: Token,
+    private val token2: Token,
+    firstTurn: Token): Player.Game, GameStateRegister.Game {
 
-    protected var board: Board? = null
-    abstract var token1: Token
-        protected set
-    abstract var token2: Token
-        protected set
-    var expectedToken: Token? = null
-        protected set
-    var gameOver: Boolean = false
-        protected set
-    var winningToken: Token? = null
-        protected set
+    protected var expectedToken: Token? = firstTurn
+    private var gameOver: Boolean = false
+    private var winningToken: Token? = null
 
-    fun setNewBoard(newBoard: Board) {
+    override fun switchBoard(newBoard: Board) {
         this.board = newBoard
     }
 
-    fun isBoardSet(): Boolean {
-        return board != null
-    }
+    override fun getGameBoardCopy(): Board = board.copy()
 
-    fun getBoardCopy(): Board? {
-        return board?.copy()
-    }
-
-    fun setNextTurn(token: Token) {
-        expectedToken = token
-    }
-
-    fun placeToken(token: Token, row: Int, column: Int) {
-        if (validValues(row, column) and isTokenExpected(token) and (board?.isFieldEmpty(row, column) == true)) {
-            board?.placeToken(token, row, column)
+    override fun placeToken(token: Token, row: Int, column: Int) {
+        if (validValues(row, column) && isTokenExpected(token) && (board.isFieldEmpty(row, column))) {
+            board.placeToken(token, row, column)
             checkIfGameOver()
             nextTurn()
         }
     }
 
-    private fun validValues(row: Int, column: Int): Boolean {
-        val board = this.board ?: return false
-        return (row in 0 until board.rows) and (column in 0 until board.columns)
-    }
+    private fun validValues(row: Int, column: Int): Boolean =
+        (row in 0 until board.rows) && (column in 0 until board.columns)
 
     private fun isTokenExpected(token: Token): Boolean {
         return token == expectedToken
@@ -55,11 +39,21 @@ abstract class MetaGame {
         }
     }
 
+    override fun setTurn(token: Token) {
+        this.expectedToken = token
+    }
+
+    override fun currentTurn(): Token? = expectedToken
+
     protected fun gameOver() {
         this.gameOver = true
     }
 
+    override fun isGameOver(): Boolean = gameOver
+
     protected fun setWinner() {
         winningToken = expectedToken
     }
+
+    fun getWinner(): Token? = this.winningToken
 }
