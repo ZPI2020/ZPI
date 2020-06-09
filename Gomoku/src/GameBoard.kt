@@ -1,4 +1,4 @@
-class Board(val rows: Int, val columns: Int) {
+class GameBoard(val rows: Int, val columns: Int) {
 
     private val board: Array<Array<Field>> = Array(rows) { Array(columns) { Field() } }
 
@@ -20,10 +20,19 @@ class Board(val rows: Int, val columns: Int) {
 
     fun getToken(row: Int, column: Int): Token? = board[row][column].token
 
-    fun copy(): Board {
-        val boardCopy = Board(rows, columns)
+    fun copy(): GameBoard {
+        val boardCopy = GameBoard(rows, columns)
         for ((origin, copy) in board.flatten().zip(boardCopy.board.flatten()))
             copy.token = origin.token
         return boardCopy
     }
+
+    fun equals(gameBoard: GameBoard) = this.board.contentEquals(gameBoard.board)
+
+    fun getValuesMatrix(): Array<IntArray> =
+        board.map { row ->
+            row.map { field ->
+                field.token?.value ?: 0
+            }.toIntArray()
+        }.toTypedArray()
 }

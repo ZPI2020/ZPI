@@ -1,1 +1,1 @@
-class GameState(val board: Board, val expectedToken: Token)
+class GameState(val gameBoard: GameBoard, val expectedToken: Token)

@@ -1,14 +1,9 @@
 abstract class Player(val playerName: String) {
-    protected var game: Game? = null
+    protected var game: MetaGame? = null
     var token: Token? = null
         protected set
 
-    interface Game {
-        fun placeToken(token: Token, row: Int, column: Int)
-        fun getGameBoardCopy(): Board
-    }
-
-    fun play(game: Game) {
+    fun play(game: MetaGame) {
         this.game = game
     }
 

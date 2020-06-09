@@ -1,3 +1,1 @@
-import java.awt.Color
-
-data class Token(val color:Color)
+data class Token(val value: Int)
