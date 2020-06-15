@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.os.Handler
 import kotlin.math.abs
 
 class Game_Board_View : View {
@@ -18,12 +19,21 @@ class Game_Board_View : View {
     constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs)
 
     lateinit var positionClickedListener : PositionClickedListener
-    var gameboardSize :Int ? = null
+    private var gameboardSize :Int ? = null
     lateinit var gameBoardArray : Array<Array<Int>>
-    val circleRadius = 30f
-    var touching: Boolean = false
-    var xPositions : Array<Float>? = null
-    var yPositions : Array<Float>? = null
+    private var xPositions : Array<Float>? = null
+    private var yPositions : Array<Float>? = null
+
+    private val circleRadius = 30f
+    private var touching: Boolean = false
+
+    var gameFinished : Boolean = false
+    lateinit var winingPoints : Array<Pair<Int,Int>>
+
+    //Potrzebne do rysowania wygranej lini
+    var startX : Float? = null
+    var startY : Float? = null
+    var drawingIteration : Int  = 1
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
@@ -32,9 +42,31 @@ class Game_Board_View : View {
             calculateXYPositions()
             drawSquares(canvas)
             drawBoard(canvas)
+            if(gameFinished){
+                drawWiningLine(canvas)
+            }
         }
     }
+    fun drawWiningLine(canvas: Canvas?){
+        var paint = Paint()
+        paint.color = Color.RED
+        paint.strokeWidth=10f
+         startX = xPositions?.get(winingPoints[0].first)
+         startY = yPositions?.get(winingPoints[0].second)
 
+        val xAdd = (xPositions?.get(winingPoints[1].first)?.minus(startX!!))!!/(50)
+        val yAdd = (yPositions?.get(winingPoints[1].second)?.minus(startY!!)!!/(50))
+
+        if(drawingIteration!!<50){
+            canvas!!.drawLine(startX!!,startY!!,startX!!+(drawingIteration!!*xAdd!!),startY!!+(drawingIteration!!*yAdd!!),paint)
+            drawingIteration = drawingIteration!!+1
+            if(drawingIteration!!<50){
+                Handler().postDelayed({invalidate()},20)
+            }
+
+        }
+
+    }
     fun checkGameBoardSize(){
         if(gameBoardArray.size == gameBoardArray[0].size ){
             gameboardSize=gameBoardArray.size
@@ -138,7 +170,12 @@ class Game_Board_View : View {
 //            y+=addwidth
 //        }
     }
-
+    fun resetGame(){
+        gameFinished = false
+        startX=null
+        startY=null
+        drawingIteration = 1
+    }
     fun getPositionOF(x:Float,y:Float): Pair<Int,Int>{
         var xpos =0
         var ypos=0

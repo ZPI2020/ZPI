@@ -29,13 +29,25 @@ class Activity_game : AppCompatActivity(), PositionClickedListener {
     }
     fun restartGameClick(view: View){
 
-        showYourMove()
-        showPlayer1Move()
-        showPlayer2Move()
-        showPlayer1Wins()
-        showPlayer2Wins()
-        showAiWins()
-        showYouWin()
+        var arr = arrayOf(Pair(0,0), Pair(5,5))
+        gameBoardView.winingPoints=arr
+        gameBoardView.gameFinished = true
+        gameBoardView.invalidate()
+//        showYourMove()
+//        showPlayer1Move()
+//        showPlayer2Move()
+//        showPlayer1Wins()
+//        showPlayer2Wins()
+//        showAiWins()
+//        showYouWin()
+    }
+    fun drawWinningPositions(arr:Array<Pair<Int,Int>>){
+        gameBoardView.winingPoints=arr
+        gameBoardView.gameFinished =  true
+        gameBoardView.invalidate()
+    }
+    fun gameBoardNewGame(){
+        gameBoardView.resetGame()
     }
     fun showYourMove(){
         image_game_notification.setImageResource(R.drawable.your_move)
