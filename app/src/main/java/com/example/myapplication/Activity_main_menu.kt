@@ -25,7 +25,7 @@ class Activity_main_menu : AppCompatActivity() {
             text_mode_image_view.setImageDrawable(drawable_text_resource);
         }
         else if(mode==1) {
-            val image_resource = resources.getIdentifier("@drawable/plveb", null, packageName)
+            val image_resource = resources.getIdentifier("@drawable/icon_pveb", null, packageName)
             val drawable_icon_resource = getResources().getDrawable(image_resource);
             val text_resource = resources.getIdentifier("@drawable/text_pveb", null, packageName)
             val drawable_text_resource = getResources().getDrawable(text_resource);
@@ -43,7 +43,7 @@ class Activity_main_menu : AppCompatActivity() {
             text_mode_image_view.setImageDrawable(drawable_text_resource);
         }
         else if(mode==3) {
-            val image_resource = resources.getIdentifier("@drawable/plvhb", null, packageName)
+            val image_resource = resources.getIdentifier("@drawable/icon_pvhb", null, packageName)
             val drawable_icon_resource = getResources().getDrawable(image_resource);
             val text_resource = resources.getIdentifier("@drawable/text_pvhb", null, packageName)
             val drawable_text_resource = getResources().getDrawable(text_resource);
