@@ -1,12 +1,13 @@
 package com.example.myapplication
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import kotlinx.android.synthetic.main.activity_match_history_popup.*
 
-class Activity_match_history_popup  : AppCompatActivity(), Game_Board_View.PositionClickedListener {
+class Activity_match_history_popup  : Activity(), Game_Board_View.PositionClickedListener {
 
     lateinit var gameboard : Array<Array<Int>>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +18,7 @@ class Activity_match_history_popup  : AppCompatActivity(), Game_Board_View.Posit
         val dm=DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
         window.setLayout(dm.widthPixels,dm.widthPixels)
+
         val board = intent.extras!!.get("board")
         gameboard=board as Array<Array<Int>>
         popupGameBoard.positionClickedListener=this
