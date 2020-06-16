@@ -2,10 +2,8 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -24,7 +22,7 @@ class Game_Board_View : View {
     private var xPositions : Array<Float>? = null
     private var yPositions : Array<Float>? = null
 
-    private val circleRadius = 30f
+
     private var touching: Boolean = false
 
     var gameFinished : Boolean = false
@@ -74,8 +72,9 @@ class Game_Board_View : View {
     }
     fun calculateXYPositions(){
         if(::gameBoardArray.isInitialized) {
-            var start = 30f
-            val correctedWidth = width.toFloat() - 60f
+            Log.d("view","rozmiar gameBoardSize="+gameboardSize)
+            var start = width!!/(gameboardSize!!*3).toFloat()
+            val correctedWidth = width!!.toFloat() - 2*start
             val addValue = correctedWidth / (gameboardSize!! - 1).toFloat()
             xPositions=Array(gameboardSize!!){0f}
             yPositions=Array(gameboardSize!!){0f}
@@ -148,10 +147,25 @@ class Game_Board_View : View {
             for(y in 0 until gameboardSize!!-1){
                 positionVal=gameBoardArray[x][y]
                 if(positionVal==1){
-                    canvas!!.drawCircle(xPositions?.get(x)!!, yPositions?.get(y)!!,circleRadius,paint1)
+                    //canvas!!.drawCircle(xPositions?.get(x)!!, yPositions?.get(y)!!,circleRadius,paint1)
+                    val pionek =BitmapFactory.decodeResource(resources,R.drawable.white_pin)
+                    val radius = width/(gameboardSize!!*3)
+                    val rect = RectF(xPositions?.get(x)!!-radius,
+                        yPositions?.get(y)!!-radius,
+                        xPositions!![x]+radius,
+                        yPositions!![y]+radius)
+                        canvas!!.drawBitmap(pionek,null,rect,null)
+
                 }
                 if(positionVal==2){
-                    canvas!!.drawCircle(xPositions?.get(x)!!, yPositions?.get(y)!!,circleRadius,paint2)
+                    //canvas!!.drawCircle(xPositions?.get(x)!!, yPositions?.get(y)!!,circleRadius,paint2)
+                    val pionek =BitmapFactory.decodeResource(resources,R.drawable.black_pin)
+                    val radius = width/(gameboardSize!!*3)
+                    val rect = RectF(xPositions?.get(x)!!-radius,
+                        yPositions?.get(y)!!-radius,
+                        xPositions!![x]+radius,
+                        yPositions!![y]+radius)
+                    canvas!!.drawBitmap(pionek,null,rect,null)
                 }
             }
         }

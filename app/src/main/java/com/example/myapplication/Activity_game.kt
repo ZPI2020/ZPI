@@ -100,14 +100,18 @@ class Activity_game : AppCompatActivity(), PositionClickedListener {
     }
     fun test (){
         val gameBoardArray = arrayOf(
-            arrayOf(0,0,0,0,0,0,1,1),
-            arrayOf(0,2,2,1,0,0,0,0),
-            arrayOf(2,2,2,2,0,0,0,1),
-            arrayOf(0,0,0,0,0,0,0,0,0),
-            arrayOf(1,0,2,0,1,2,2,0),
-            arrayOf(2,2,2,0,1,1,0,0),
-            arrayOf(0,0,0,0,0,0,0,0),
-            arrayOf(0,0,0,0,0,0,0,0)
+            arrayOf(0,0,0,0,0,0,1,1,0,1,1,2),
+            arrayOf(0,2,2,1,0,0,0,0,0,1,1,0),
+            arrayOf(2,2,2,2,0,1,0,1,0,1,1,1),
+            arrayOf(0,0,0,0,0,1,0,0,0,0,1,1),
+            arrayOf(1,0,2,0,1,2,2,0,0,1,1,1),
+            arrayOf(2,2,2,0,1,1,0,0,0,1,1,2),
+            arrayOf(0,0,0,1,1,1,0,0,0,1,1,2),
+            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
+            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
+            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
+            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
+            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2)
         )
         gameBoardView.gameBoardArray = gameBoardArray
         gameBoardView.invalidate()
