@@ -17,4 +17,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.097"
         app:srcCompat="@drawable/match_history" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/matches_recycler"
+        android:layout_width="336dp"
+        android:layout_height="379dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

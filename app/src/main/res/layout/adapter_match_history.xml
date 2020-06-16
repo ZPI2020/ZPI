@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/match_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_design"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/tv_winner"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/retro"
+        android:gravity="center"
+        android:text="TEKST"
+        android:textColor="#40AAA5"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:fontFamily="@font/retro"
+        android:textColor="#40AAA5" />
+
+    <TextView
+        android:id="@+id/tv_mode"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:fontFamily="@font/retro"
+        android:textColor="#40AAA5" />
+
+
+
+</LinearLayout>

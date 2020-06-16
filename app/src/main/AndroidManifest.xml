@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity_game"></activity>
+        <activity android:name=".Activity_match_history_popup"></activity>
+        <activity android:name=".Activity_game" />
         <activity android:name=".Activity_match_history" />
         <activity android:name=".Activity_settings" />
         <activity android:name=".Activity_main_menu">
