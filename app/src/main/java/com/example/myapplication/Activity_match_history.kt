@@ -2,29 +2,35 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_match_history.*
-import kotlinx.android.synthetic.main.activity_match_history.view.*
 
 
 class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickListener {
 
-
+    var matches=ArrayList<GameLog>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_history)
         val matches_rv =  matches_recycler as RecyclerView
-        val h1=History()
+        no_match_text.visibility= View.GONE
+        val loader=GamesHistory()
+        try{
+            matches=loader.load(this)
+        }
+        catch(e:Exception){
 
-        val matches=ArrayList<History>()
-        matches.add(h1)
-        matches.add(h1)
-        matches.add(h1)
+            no_match_text.visibility= View.VISIBLE
+        }
+
+
 
         val adapter =  AdapterMatchHistory(matches)
+
         adapter.setOnClickListener(this)
         matches_rv.adapter = adapter
         matches_rv.layoutManager= LinearLayoutManager(this)
@@ -32,20 +38,7 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
 
     override fun onItemClick(index: Int) {
 
-        val gameBoardArray = arrayOf(
-            arrayOf(0,0,0,0,0,0,1,1,0,1,1,2),
-            arrayOf(0,2,2,1,0,0,0,0,0,1,1,0),
-            arrayOf(2,2,2,2,0,1,0,1,0,1,1,1),
-            arrayOf(0,0,0,0,0,1,0,0,0,0,1,1),
-            arrayOf(1,0,2,0,1,2,2,0,0,1,1,1),
-            arrayOf(2,2,2,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,0,1,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2)
-        )
+        val gameBoardArray = matches[index].board
         val popup = Activity_match_history_popup()
 
 

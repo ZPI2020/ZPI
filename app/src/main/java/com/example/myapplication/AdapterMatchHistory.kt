@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.adapter_match_history.view.*
 
-class AdapterMatchHistory(private var match_list :ArrayList<History>):
+class AdapterMatchHistory(private var match_list :ArrayList<GameLog>):
     RecyclerView.Adapter<AdapterMatchHistory.ViewHolder>() {
 
     private var onClickListener: OnClickListener? = null
@@ -51,8 +51,8 @@ class AdapterMatchHistory(private var match_list :ArrayList<History>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tv_winner.text = match_list[position].winner
-        holder.tv_date.text = match_list[position].date.toString()
-        holder.tv_mode.text = getMode(match_list[position].mode)
+        holder.tv_date.text = match_list[position].date
+        holder.tv_mode.text = match_list[position].diffLevel
         holder.bindOnClickListener(onClickListener,position)
 
 
@@ -60,21 +60,7 @@ class AdapterMatchHistory(private var match_list :ArrayList<History>):
     override fun getItemCount(): Int {
         return match_list.size
     }
-    fun getMode(mode: Int): String{
-        if(mode==0){
-            return ""
-        }
-        else if(mode==1){
-            return "EASY"
-        }
-        else if(mode==2){
-            return "MEDIUM"
-        }
-        else if(mode==3){
-            return "HARD"
-        }
-        return ""
-    }
+
 
 
 

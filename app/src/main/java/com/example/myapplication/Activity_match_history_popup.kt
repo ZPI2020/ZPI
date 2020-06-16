@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.style.BackgroundColorSpan
 import android.util.DisplayMetrics
 import android.view.MotionEvent
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_match_history_popup.*
 
 class Activity_match_history_popup  : Activity(), Game_Board_View.PositionClickedListener {
@@ -28,7 +29,9 @@ class Activity_match_history_popup  : Activity(), Game_Board_View.PositionClicke
         popupGameBoard.resetGame()
         popupGameBoard.gameBoardArray=gameboard
         popupGameBoard.invalidate()
-        popupGameBoard.setBackgroundColor(Color.rgb(64, 170, 165))
+        val resID = this.resources.getIdentifier("board_gradient", "drawable", this.packageName)
+        popupGameBoard.background= ActivityCompat.getDrawable(this,resID)
+        //popupGameBoard.setBackgroundColor(Color.rgb(33, 33, 51))
 
     }
 

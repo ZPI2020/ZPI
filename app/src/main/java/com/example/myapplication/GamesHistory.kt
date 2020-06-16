@@ -22,7 +22,7 @@ class GamesHistory {
         fw.close()
     }
 
-    fun load(ctx: Context): List<GameLog> {
+    fun load(ctx: Context): ArrayList<GameLog> {
         val fis = ctx.openFileInput(FILE_NAME)
         val isr = InputStreamReader(fis)
         val br = BufferedReader(isr)
@@ -42,7 +42,7 @@ class GamesHistory {
         }
         fis.close()
 
-        val logs = mutableListOf<GameLog>()
+        val logs = ArrayList<GameLog>()
         for (i in dates.indices)
             logs.add(GameLog(dates[i], diffLevels[i], winners[i], gameBoards[i]))
 

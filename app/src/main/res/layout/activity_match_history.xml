@@ -18,13 +18,33 @@
         app:layout_constraintVertical_bias="0.097"
         app:srcCompat="@drawable/match_history" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/matches_recycler"
-        android:layout_width="336dp"
-        android:layout_height="379dp"
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="400dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <TextView
+            android:id="@+id/no_match_text"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_design"
+            android:fontFamily="@font/retro"
+            android:gravity="center"
+            android:text="NO GAMES FOUND"
+            android:textColor="#40AAA5"
+            android:textSize="24sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/matches_recycler"
+            android:layout_width="336dp"
+            android:layout_height="379dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

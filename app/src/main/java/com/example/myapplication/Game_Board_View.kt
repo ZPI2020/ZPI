@@ -96,7 +96,7 @@ class Game_Board_View : View {
     fun drawSquares(canvas: Canvas?){
         //Kolor wypelnienia planszy
         val paintFill = Paint()
-        paintFill.setColor(Color.GRAY)
+        paintFill.setColor(Color.argb(0,43, 43, 51))
         paintFill.style= Paint.Style.FILL
         //kolor obramowek planszy
         val paintStroke = Paint()
