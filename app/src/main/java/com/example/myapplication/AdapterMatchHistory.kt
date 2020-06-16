@@ -34,6 +34,7 @@ class AdapterMatchHistory(private var match_list :ArrayList<History>):
         fun bindOnClickListener(onClickListener: OnClickListener?, index: Int)
         {
             item.setOnClickListener{view -> onClickListener?.onItemClick(index)}
+
         }
 
 

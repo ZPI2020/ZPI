@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
+import android.graphics.Color.TRANSPARENT
 import android.graphics.Color.rgb
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -23,6 +24,8 @@ class Game_Board_View : View {
     private var xPositions : Array<Float>? = null
     private var yPositions : Array<Float>? = null
 
+    var drawFill = false
+
 
     private var touching: Boolean = false
 
@@ -36,6 +39,7 @@ class Game_Board_View : View {
 
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
+
         if(::gameBoardArray.isInitialized){
             checkGameBoardSize()
             calculateXYPositions()
@@ -134,7 +138,10 @@ class Game_Board_View : View {
 //        }
 
         for(rect in squares){
-            //canvas!!.drawRoundRect(rect,roundAngle,roundAngle,paintFill)
+            if(drawFill){
+                canvas!!.drawRoundRect(rect,roundAngle,roundAngle,paintFill)
+            }
+
             canvas!!.drawRoundRect(rect,roundAngle,roundAngle,paintStroke)
         }
     }
