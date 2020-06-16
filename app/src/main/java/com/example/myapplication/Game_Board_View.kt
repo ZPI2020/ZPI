@@ -225,6 +225,7 @@ class Game_Board_View : View {
             MotionEvent.ACTION_DOWN -> {
                 if(::gameBoardArray.isInitialized){
                 pos = getPositionOF(x,y)}
+                positionClickedListener?.onPositionClicked(pos.first, pos.second)
                 touching = true
             }
             MotionEvent.ACTION_MOVE -> {
