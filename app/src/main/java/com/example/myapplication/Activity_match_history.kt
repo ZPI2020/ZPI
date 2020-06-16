@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -16,7 +15,7 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.example.myapplication.R.layout.activity_match_history)
+        setContentView(R.layout.activity_match_history)
         val matches_rv =  matches_recycler as RecyclerView
         val h1=History()
 
