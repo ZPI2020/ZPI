@@ -1,17 +1,26 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class Activity_settings : AppCompatActivity() {
-    var gb_size_mode=0
-    var fm_mode=0
+    var gb_size_mode = 0
+    var fm_mode = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        gb_size_mode = sharedPref.getInt("SIZE", 0)
+        fm_mode = sharedPref.getInt("FIRSTMOVE", 0)
+
+        updateFMModeIcon()
+        updateGBSizeModeIcon()
     }
     fun rightArrowGBSizeOnClick(v : View) {
         if(gb_size_mode<2) {
@@ -104,7 +113,15 @@ class Activity_settings : AppCompatActivity() {
 
             text_fm_image_view.setImageDrawable(drawable_text_resource)
         }
+    }
 
-
+    override fun onBackPressed() {
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        with (sharedPref.edit()) {
+            putInt("SIZE", gb_size_mode)
+            putInt("FIRSTMOVE", fm_mode)
+            apply()
+        }
+        super.onBackPressed()
     }
 }
