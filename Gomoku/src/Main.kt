@@ -8,6 +8,7 @@ fun main() {
     val player1 = HumanPlayer("Kuba").also { it.assign(token1); it.play(game) }
     val player2 = AIPlayer("AI",1).also { it.assign(token2); it.play(game) }
     val register = GameStateRegister(game)
+    val history = GamesHistory()
 
     register.saveState()
     player1.makeMove(0,0)
@@ -39,7 +40,10 @@ fun main() {
     player1.makeMove(1,7)
     player2.makeMove()
 
-    printBoard(game.getGameBoardCopy())
+//    printBoard(game.getGameBoardCopy())
+
+//    history.save("EASY", "AI", game.getGameBoardCopy().getValuesMatrix())
+//    history.load().first().also { println(it) }
 }
 
 fun printBoard(board: GameBoard?) {

@@ -2,11 +2,18 @@ abstract class MetaGame(
     protected var gameBoard: GameBoard,
     private val token1: Token,
     private val token2: Token,
-    firstTurn: Token) {
+    private val firstTurn: Token) {
 
     protected var expectedToken: Token? = firstTurn
     private var gameOver: Boolean = false
     private var winningToken: Token? = null
+
+    fun resetGame() {
+        gameBoard.clear()
+        expectedToken = firstTurn
+        gameOver = false
+        winningToken = null
+    }
 
     fun switchGameBoard(newGameBoard: GameBoard) {
         this.gameBoard = newGameBoard

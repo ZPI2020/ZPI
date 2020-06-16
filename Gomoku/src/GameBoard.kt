@@ -4,6 +4,10 @@ class GameBoard(val rows: Int, val columns: Int) {
 
     fun size(): Pair<Int, Int> = Pair(rows, columns)
 
+    fun clear() {
+        board.flatten().forEach { it.token = null }
+    }
+
     fun isFull(): Boolean {
         for (field in board.flatten()) {
             if (field.isEmpty())
