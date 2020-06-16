@@ -29,7 +29,7 @@ class Activity_game : AppCompatActivity(), PositionClickedListener {
     }
     fun restartGameClick(view: View){
 
-        var arr = arrayOf(Pair(0,0), Pair(5,5))
+        var arr = arrayOf(Pair(5,5), Pair(0,0))
         gameBoardView.winingPoints=arr
         gameBoardView.gameFinished = true
         gameBoardView.invalidate()
