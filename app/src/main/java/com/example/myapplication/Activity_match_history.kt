@@ -48,8 +48,10 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
         )
         val popup = Activity_match_history_popup()
 
+
         val intent = Intent(this, popup::class.java)
         intent.putExtra("board",gameBoardArray)
+
         startActivity(intent)
     }
 }

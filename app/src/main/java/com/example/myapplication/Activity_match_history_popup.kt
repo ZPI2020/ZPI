@@ -16,8 +16,9 @@ class Activity_match_history_popup  : AppCompatActivity() {
 
         val dm=DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
-        window.setLayout(dm.widthPixels*.8.toInt(),dm.widthPixels*.8.toInt())
-        gameboard= intent.getSerializableExtra("gameboard") as Array<Array<Int>>
+        window.setLayout(dm.widthPixels,dm.widthPixels)
+        val board = intent.extras!!.get("board")
+        gameboard=board as Array<Array<Int>>
         popupGameBoard.resetGame()
         popupGameBoard.gameBoardArray=gameboard
         popupGameBoard.invalidate()

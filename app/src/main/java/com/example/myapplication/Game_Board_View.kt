@@ -98,7 +98,7 @@ class Game_Board_View : View {
         val paintStroke = Paint()
         paintStroke.setColor(Color.rgb(64, 170, 165))
         paintStroke.style= Paint.Style.STROKE
-        paintStroke.strokeWidth= 5F
+        paintStroke.strokeWidth= 2F
 
         val squares = ArrayList<RectF>()
 //        var xstart=30f
@@ -107,7 +107,7 @@ class Game_Board_View : View {
 //        val addwidth=widthCorrect/(gameboardSize-1).toFloat()
 //        var xfinish=addwidth+30F
 //        var yfinish= addwidth+30F
-        val roundAngle = 25f
+        val roundAngle = 10f
         for (x in 0 until  gameboardSize!!-1){
             for(y in 0 until  gameboardSize!!-1){
                 val rect:RectF = RectF(xPositions?.get(x)!!,
