@@ -9,13 +9,13 @@ import com.example.myapplication.Game_Board_View.PositionClickedListener
 import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
 
-class Activity_game : AppCompatActivity(), PositionClickedListener {
+class Activity_game : AppCompatActivity(), PositionClickedListener,gameListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         gameBoardView.positionClickedListener=this
-        test()
+
 
     }
     //Zeby  wyswietlic tablice trzeba  gameBoardView.gameBoardArray= tablica  i gameBoardView.invalidate()
@@ -33,13 +33,7 @@ class Activity_game : AppCompatActivity(), PositionClickedListener {
         gameBoardView.winingPoints=arr
         gameBoardView.gameFinished = true
         gameBoardView.invalidate()
-//        showYourMove()
-//        showPlayer1Move()
-//        showPlayer2Move()
-//        showPlayer1Wins()
-//        showPlayer2Wins()
-//        showAiWins()
-//        showYouWin()
+
     }
     fun drawWinningPositions(arr:Array<Pair<Int,Int>>){
         gameBoardView.winingPoints=arr
@@ -98,22 +92,11 @@ class Activity_game : AppCompatActivity(), PositionClickedListener {
             image_game_notification.visibility = View.INVISIBLE
         }, 2000)
     }
-    fun test (){
-        val gameBoardArray = arrayOf(
-            arrayOf(0,0,0,0,0,0,1,1,0,1,1,2),
-            arrayOf(0,2,2,1,0,0,0,0,0,1,1,0),
-            arrayOf(2,2,2,2,0,1,0,1,0,1,1,1),
-            arrayOf(0,0,0,0,0,1,0,0,0,0,1,1),
-            arrayOf(1,0,2,0,1,2,2,0,0,1,1,1),
-            arrayOf(2,2,2,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,0,1,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2)
-        )
-        gameBoardView.gameBoardArray = gameBoardArray
+    fun setBoard(board : Array<Array<Int>>){
+
+        gameBoardView.gameBoardArray = board
         gameBoardView.invalidate()
     }
+
+
 }

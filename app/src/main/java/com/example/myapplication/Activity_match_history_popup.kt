@@ -19,7 +19,7 @@ class Activity_match_history_popup  : Activity(), Game_Board_View.PositionClicke
 
         val dm=DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
-        window.setLayout(dm.widthPixels,dm.widthPixels)
+        window.setLayout((dm.widthPixels*0.9).toInt(), (dm.widthPixels*0.9).toInt())
 
         val board = intent.extras!!.get("board")
         gameboard=board as Array<Array<Int>>
