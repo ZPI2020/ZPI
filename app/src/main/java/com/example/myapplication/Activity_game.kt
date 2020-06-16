@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -9,111 +10,104 @@ import com.example.myapplication.Game_Board_View.PositionClickedListener
 import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
 
-class Activity_game : AppCompatActivity(), PositionClickedListener {
+class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresenter.GameListener {
+
+    private var presenter: GamePresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         gameBoardView.positionClickedListener=this
-        test()
 
+        val sharedPref = this.getSharedPreferences("SETTINGS", Context.MODE_PRIVATE) ?: return
+        val gb_size_mode = sharedPref.getInt("SIZE", 0)
+        val fm_mode = sharedPref.getInt("FIRSTMOVE", 0)
+        val game_mode = intent.extras?.getInt("GAMEMODE") ?: 0
+
+        presenter = GamePresenter(this, fm_mode, gb_size_mode, game_mode)
+        presenter?.startGame()
     }
-    //Zeby  wyswietlic tablice trzeba  gameBoardView.gameBoardArray= tablica  i gameBoardView.invalidate()
 
     override fun onPositionClicked(x: Int, y: Int) {
-        TODO("Przekazuje ruch x y")
+        TODO("not implemented")
     }
 
     fun undoMoveClick(view: View){
-        TODO("UNDO MOVE")
+        TODO("not implemented")
     }
-    fun restartGameClick(view: View){
 
-        var arr = arrayOf(Pair(5,5), Pair(0,0))
-        gameBoardView.winingPoints=arr
-        gameBoardView.gameFinished = true
-        gameBoardView.invalidate()
-//        showYourMove()
-//        showPlayer1Move()
-//        showPlayer2Move()
-//        showPlayer1Wins()
-//        showPlayer2Wins()
-//        showAiWins()
-//        showYouWin()
+    fun restartGameClick(view: View){
+        TODO("not implemented")
     }
-    fun drawWinningPositions(arr:Array<Pair<Int,Int>>){
+
+    override fun drawWinningPositions(arr:Array<Pair<Int,Int>>){
         gameBoardView.winingPoints=arr
         gameBoardView.gameFinished =  true
         gameBoardView.invalidate()
     }
-    fun gameBoardNewGame(){
+
+    override fun gameBoardNewGame(){
         gameBoardView.resetGame()
     }
-    fun showYourMove(){
+
+    override fun showYourMove(){
         image_game_notification.setImageResource(R.drawable.your_move)
         image_game_notification.visibility=View.VISIBLE
         Handler().postDelayed({
             image_game_notification.visibility = View.INVISIBLE
         }, 700)
     }
-    fun showPlayer1Move(){
+
+    override fun showPlayer1Move(){
         image_game_notification.setImageResource(R.drawable.player1_move)
         image_game_notification.visibility=View.VISIBLE
         Handler().postDelayed({
             image_game_notification.visibility = View.INVISIBLE
         }, 700)
     }
-    fun showPlayer1Wins(){
+
+    override fun showPlayer1Wins(){
         image_game_notification.setImageResource(R.drawable.player1_wins)
         image_game_notification.visibility=View.VISIBLE
         Handler().postDelayed({
             image_game_notification.visibility = View.INVISIBLE
         }, 2000)
     }
-    fun showPlayer2Move(){
+
+    override fun showPlayer2Move(){
         image_game_notification.setImageResource(R.drawable.player2_move)
         image_game_notification.visibility=View.VISIBLE
         Handler().postDelayed({
             image_game_notification.visibility = View.INVISIBLE
         }, 700)
     }
-    fun showPlayer2Wins(){
+
+    override fun showPlayer2Wins(){
         image_game_notification.setImageResource(R.drawable.player2_wins)
         image_game_notification.visibility=View.VISIBLE
         Handler().postDelayed({
             image_game_notification.visibility = View.INVISIBLE
         }, 2000)
     }
-    fun showAiWins(){
+
+    override fun showAiWins(){
         image_game_notification.setImageResource(R.drawable.ai_wins)
         image_game_notification.visibility=View.VISIBLE
         Handler().postDelayed({
             image_game_notification.visibility = View.INVISIBLE
         }, 2000)
     }
-    fun showYouWin(){
+
+    override fun setBoard(board : Array<IntArray>){
+        gameBoardView.gameBoardArray = board
+        gameBoardView.invalidate()
+    }
+
+    override fun showYouWin(){
         image_game_notification.setImageResource(R.drawable.your_move)
         image_game_notification.visibility=View.VISIBLE
         Handler().postDelayed({
             image_game_notification.visibility = View.INVISIBLE
         }, 2000)
-    }
-    fun test (){
-        val gameBoardArray = arrayOf(
-            arrayOf(0,0,0,0,0,0,1,1,0,1,1,2),
-            arrayOf(0,2,2,1,0,0,0,0,0,1,1,0),
-            arrayOf(2,2,2,2,0,1,0,1,0,1,1,1),
-            arrayOf(0,0,0,0,0,1,0,0,0,0,1,1),
-            arrayOf(1,0,2,0,1,2,2,0,0,1,1,1),
-            arrayOf(2,2,2,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,0,1,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2)
-        )
-        gameBoardView.gameBoardArray = gameBoardArray
-        gameBoardView.invalidate()
     }
 }

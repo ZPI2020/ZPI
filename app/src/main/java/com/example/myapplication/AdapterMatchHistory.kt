@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.adapter_match_history.view.*
 
 class AdapterMatchHistory(private var match_list :ArrayList<History>):
     RecyclerView.Adapter<AdapterMatchHistory.ViewHolder>() {

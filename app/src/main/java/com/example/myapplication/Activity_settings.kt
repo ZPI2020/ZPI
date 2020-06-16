@@ -15,7 +15,7 @@ class Activity_settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val sharedPref = this.getSharedPreferences("SETTINGS", Context.MODE_PRIVATE) ?: return
         gb_size_mode = sharedPref.getInt("SIZE", 0)
         fm_mode = sharedPref.getInt("FIRSTMOVE", 0)
 
@@ -116,7 +116,7 @@ class Activity_settings : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        val sharedPref = this.getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
         with (sharedPref.edit()) {
             putInt("SIZE", gb_size_mode)
             putInt("FIRSTMOVE", fm_mode)
