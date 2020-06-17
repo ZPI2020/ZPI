@@ -112,13 +112,16 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
     }
 
     fun undoMove() {
-        register.recoverLastState()
-        game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
-        movesCounter--
-        updateMovesCounter()
+        if(!game.isGameOver()) {
+            register.recoverLastState()
+            game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+            movesCounter--
+            updateMovesCounter()
+        }
     }
     fun refreshWiningLine(){
-        if(game.isGameOver())drawWinningLine()
+        if(game.isGameOver())
+            drawWinningLine()
     }
 
     fun onBoardClick(row: Int, column: Int) {
