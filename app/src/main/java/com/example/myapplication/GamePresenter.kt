@@ -43,6 +43,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         fun showPlayer1Wins()
         fun showPlayer1Move()
         fun showYourMove()
+        fun showDraw()
         fun gameBoardNewGame()
         fun drawWinningPositions(arr:Array<Pair<Int,Int>>)
     }
@@ -67,6 +68,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         checkForAIMove()
         game_ui.gameBoardNewGame()
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+        updateMoveInfo()
     }
 
     fun restartGame() {
@@ -75,6 +77,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
             register.clearRegistry()
             checkForAIMove()
             game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+            updateMoveInfo()
         }
     }
 
@@ -107,17 +110,48 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
             if (game.isGameOver()) onGameOver()
         }
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+        updateMoveInfo()
     }
 
     private fun isMoveValid(row: Int, column: Int): Boolean =
         !moveLock && row >= 0 && column >= 0 && game.isMoveEligible(row, column)
 
     private fun onGameOver() {
-        // koniec gry
+        moveLock = true
+        if (game.getWinner() == player1.token) {
+            if (player2 is HumanPlayer)
+                game_ui.showPlayer1Wins()
+            else
+                game_ui.showYouWin()
+        }
+        else if (game.getWinner() == player2.token) {
+            if (player2 is HumanPlayer)
+                game_ui.showPlayer2Wins()
+            else
+                game_ui.showAiWins()
+        } else
+            game_ui.showDraw()
+    }
+
+    private fun updateMoveInfo() {
+        if (game.currentTurn() == player1.token) {
+            if (player2 is HumanPlayer)
+                game_ui.showPlayer1Move()
+            else
+                game_ui.showYourMove()
+        }
+        else if (game.currentTurn() == player2.token && player2 is HumanPlayer) {
+            game_ui.showPlayer2Move()
+        }
     }
 
     override fun taskCompleted() {
-        moveLock = false
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+        if (game.isGameOver())
+            onGameOver()
+        else {
+            moveLock = false
+            updateMoveInfo()
+        }
     }
 }

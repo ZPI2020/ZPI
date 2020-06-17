@@ -65,6 +65,14 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
         }, 700)
     }
 
+    override fun showDraw() {
+        image_game_notification.setImageResource(R.drawable.text_draw)
+        image_game_notification.visibility=View.VISIBLE
+        Handler().postDelayed({
+            image_game_notification.visibility = View.INVISIBLE
+        }, 2000)
+    }
+
     override fun showPlayer1Move(){
         image_game_notification.setImageResource(R.drawable.player1_move)
         image_game_notification.visibility=View.VISIBLE
