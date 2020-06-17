@@ -5,10 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_match_history_popup">
+
     <com.example.myapplication.Game_Board_View
         android:id="@+id/popupGameBoard"
-        android:clickable="false"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:clickable="false"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-109dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

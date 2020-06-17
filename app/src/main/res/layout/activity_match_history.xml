@@ -19,8 +19,8 @@
         app:srcCompat="@drawable/match_history" />
 
     <LinearLayout
-        android:layout_width="340dp"
-        android:layout_height="400dp"
+        android:layout_width="322dp"
+        android:layout_height="423dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/no_match_text"
-            android:layout_width="340dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/button_design"
             android:fontFamily="@font/retro"
@@ -41,10 +41,52 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/matches_recycler"
-            android:layout_width="336dp"
-            android:layout_height="379dp">
+            android:layout_width="match_parent"
+            android:layout_height="297dp">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <LinearLayout
+            android:id="@+id/match_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_design"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/tv_winner"
+                android:layout_width="0dp"
+                android:layout_height="37dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/retro"
+                android:gravity="center"
+                android:text="TEKST"
+                android:textColor="#40AAA5"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="37dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/retro"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="#40AAA5" />
+
+            <TextView
+                android:id="@+id/tv_mode"
+                android:layout_width="0dp"
+                android:layout_height="37dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/retro"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="#40AAA5" />
+            >
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
