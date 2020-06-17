@@ -29,4 +29,8 @@ class GameStateRegister(private val game: MetaGame) {
         return if (gameStates.isNotEmpty()) gameStates.removeAt(gameStates.lastIndex)
         else null
     }
+
+    fun clearRegistry() {
+        gameStates.clear()
+    }
 }

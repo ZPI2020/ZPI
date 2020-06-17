@@ -71,5 +71,13 @@ public class Board {
         return availableMoves;
     }
 
-
+    public Boolean isEmpty() {
+        for (int col = 0; col < BOARD_WIDTH; col++) {
+            for (int row = 0; row < BOARD_HEIGHT; row++) {
+                if (board_matrix[row][col] != 0)
+                    return false;
+            }
+        }
+        return true;
+    }
 }

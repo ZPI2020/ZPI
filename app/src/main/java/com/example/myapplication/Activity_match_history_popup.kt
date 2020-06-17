@@ -22,7 +22,7 @@ class Activity_match_history_popup  : Activity(), Game_Board_View.PositionClicke
         window.setLayout((dm.widthPixels*0.9).toInt(), (dm.widthPixels*0.9).toInt())
 
         val board = intent.extras!!.get("board")
-        gameboard=board as Array<IntArray>
+        gameboard = board as Array<IntArray>
         popupGameBoard.positionClickedListener=this
         popupGameBoard.drawFill=true
         popupGameBoard.resetGame()

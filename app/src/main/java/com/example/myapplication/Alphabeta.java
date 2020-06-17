@@ -70,6 +70,8 @@ public class Alphabeta {
             return x;
         }
 
+        if (board.isEmpty()) return new Object[] {0, new int[] {board.BOARD_WIDTH/2, board.BOARD_HEIGHT/2}};
+
         TreeMap<Double, int[]> all_poss_moves = getPossibleMoves(board);
 
         if (all_poss_moves.size() == 0) {

@@ -2,17 +2,16 @@ package com.example.myapplication
 
 import kotlin.math.roundToInt
 
-class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMode: Int, gameMode: Int) {
+class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMode: Int, gameMode: Int): TaskCaller {
 
     private val token1 = Token(1)
     private val token2 = Token(2)
-    private val board = createBoard(boardSizeMode)
-    private val firstMove = getFirstMove(fmMode)
-    private val game = Gomoku(board, token1, token2, firstMove)
+    private val game = Gomoku(createBoard(boardSizeMode), token1, token2, getFirstMove(fmMode))
     private val register = GameStateRegister(game)
     private val history = GamesHistory()
     private lateinit var player1: Player
     private lateinit var player2: Player
+    private var moveLock = true
 
     init {
         when (gameMode) {
@@ -50,7 +49,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
 
     private fun getFirstMove(fmMode: Int): Token {
         return when (fmMode) {
-            1 -> this.token2
+            1 -> this.token1
             2 -> this.token2
             else -> if (Math.random().roundToInt() == 0) token1 else token2
         }
@@ -65,7 +64,57 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
     }
 
     fun startGame() {
+        checkForAIMove()
         game_ui.gameBoardNewGame()
+        game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+    }
+
+    fun restartGame() {
+        if (game.isGameOver()) {
+            game.resetGame()
+            register.clearRegistry()
+            checkForAIMove()
+            game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+        }
+    }
+
+    private fun checkForAIMove() {
+        if (player2 is AIPlayer && game.currentTurn() == player2.token) {
+            moveLock = true
+            CompMoveAsyncTask((player2 as AIPlayer), this).execute()
+        }
+        else
+            moveLock = false
+    }
+
+    fun undoMove() {
+        register.recoverLastState()
+        game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+    }
+
+    fun onBoardClick(row: Int, column: Int) {
+        if (row < 0 || column < 0 || moveLock) return
+
+        if (game.currentTurn() == player1.token && player1 is HumanPlayer) {
+            register.saveState()
+            (player1 as HumanPlayer).makeMove(row, column)
+            if (game.isGameOver()) onGameOver()
+            else checkForAIMove()
+        }
+        else if (game.currentTurn() == player2.token && player2 is HumanPlayer) {
+            register.saveState()
+            (player2 as HumanPlayer).makeMove(row, column)
+            if (game.isGameOver()) onGameOver()
+        }
+        game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+    }
+
+    private fun onGameOver() {
+        // koniec gry
+    }
+
+    override fun taskCompleted() {
+        moveLock = false
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
     }
 }

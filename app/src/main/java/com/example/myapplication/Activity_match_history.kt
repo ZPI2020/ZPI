@@ -33,18 +33,18 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
     override fun onItemClick(index: Int) {
 
         val gameBoardArray = arrayOf(
-            arrayOf(0,0,0,0,0,0,1,1,0,1,1,2),
-            arrayOf(0,2,2,1,0,0,0,0,0,1,1,0),
-            arrayOf(2,2,2,2,0,1,0,1,0,1,1,1),
-            arrayOf(0,0,0,0,0,1,0,0,0,0,1,1),
-            arrayOf(1,0,2,0,1,2,2,0,0,1,1,1),
-            arrayOf(2,2,2,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,0,1,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
-            arrayOf(0,0,1,0,1,1,0,0,0,1,1,2)
+            intArrayOf(0,0,0,0,0,0,1,1,0,1,1,2),
+            intArrayOf(0,2,2,1,0,0,0,0,0,1,1,0),
+            intArrayOf(2,2,2,2,0,1,0,1,0,1,1,1),
+            intArrayOf(0,0,0,0,0,1,0,0,0,0,1,1),
+            intArrayOf(1,0,2,0,1,2,2,0,0,1,1,1),
+            intArrayOf(2,2,2,0,1,1,0,0,0,1,1,2),
+            intArrayOf(0,0,0,1,1,1,0,0,0,1,1,2),
+            intArrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
+            intArrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
+            intArrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
+            intArrayOf(0,0,1,0,1,1,0,0,0,1,1,2),
+            intArrayOf(0,0,1,0,1,1,0,0,0,1,1,2)
         )
         val popup = Activity_match_history_popup()
 

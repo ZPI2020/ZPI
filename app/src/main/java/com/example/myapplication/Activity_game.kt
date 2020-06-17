@@ -25,19 +25,28 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
         val game_mode = intent.extras?.getInt("GAMEMODE") ?: 0
 
         presenter = GamePresenter(this, fm_mode, gb_size_mode, game_mode)
+    }
+
+    override fun onStart() {
+        super.onStart()
         presenter?.startGame()
     }
 
     override fun onPositionClicked(x: Int, y: Int) {
-        TODO("not implemented")
+        //określenie rzedu i kolumny
+        //jesli blad to row == -1, column == -1
+
+        val row = Math.random()*7
+        val column = Math.random()*7
+        presenter?.onBoardClick(row.toInt(), column.toInt())
     }
 
     fun undoMoveClick(view: View){
-        TODO("not implemented")
+        presenter?.undoMove()
     }
 
     fun restartGameClick(view: View){
-        TODO("not implemented")
+        presenter?.restartGame()
     }
 
     override fun drawWinningPositions(arr:Array<Pair<Int,Int>>){
