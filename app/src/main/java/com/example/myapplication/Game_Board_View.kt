@@ -20,7 +20,7 @@ class Game_Board_View : View {
 
     lateinit var positionClickedListener : PositionClickedListener
     private var gameboardSize :Int ? = null
-    lateinit var gameBoardArray : Array<Array<Int>>
+    lateinit var gameBoardArray : Array<IntArray>
     private var xPositions : Array<Float>? = null
     private var yPositions : Array<Float>? = null
 

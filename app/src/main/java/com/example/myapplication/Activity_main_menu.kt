@@ -82,6 +82,7 @@ class Activity_main_menu : AppCompatActivity() {
     }
     fun goToGame(view: View?) {
         val intent = Intent(this, Activity_game::class.java)
+        intent.putExtra("GAMEMODE", mode)
         startActivity(intent)
     }
 }

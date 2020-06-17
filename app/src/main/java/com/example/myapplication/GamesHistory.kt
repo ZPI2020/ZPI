@@ -12,7 +12,7 @@ class GamesHistory {
 
     fun save(diffLevel: String, winner: String, board: Array<IntArray>, ctx: Context) {
 //        val fw = FileWriter(FILE_NAME, true)
-        val fw = ctx.openFileOutput(FILE_NAME,  MODE_APPEND)
+        val fw = ctx.openFileOutput(FILE_NAME, MODE_APPEND)
 
         fw.write(("date:" + Calendar.YEAR + "/" + Calendar.MONTH + "/" + Calendar.DAY_OF_MONTH + "\n").toByteArray())
         fw.write("difficulty:$diffLevel\n".toByteArray())

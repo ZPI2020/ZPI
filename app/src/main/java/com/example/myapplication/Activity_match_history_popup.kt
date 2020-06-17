@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_match_history_popup.*
 
 class Activity_match_history_popup  : Activity(), Game_Board_View.PositionClickedListener {
 
-    lateinit var gameboard : Array<Array<Int>>
+    lateinit var gameboard : Array<IntArray>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_history_popup)
@@ -20,14 +20,14 @@ class Activity_match_history_popup  : Activity(), Game_Board_View.PositionClicke
 
         val dm=DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
-        window.setLayout(dm.widthPixels,dm.widthPixels)
+        window.setLayout((dm.widthPixels*0.9).toInt(), (dm.widthPixels*0.9).toInt())
 
         val board = intent.extras!!.get("board")
-        gameboard=board as Array<Array<Int>>
+        gameboard=board as Array<IntArray>
         popupGameBoard.positionClickedListener=this
         popupGameBoard.drawFill=true
         popupGameBoard.resetGame()
-        popupGameBoard.gameBoardArray=gameboard
+        popupGameBoard.gameBoardArray = gameboard
         popupGameBoard.invalidate()
         val resID = this.resources.getIdentifier("board_gradient", "drawable", this.packageName)
         popupGameBoard.background= ActivityCompat.getDrawable(this,resID)
