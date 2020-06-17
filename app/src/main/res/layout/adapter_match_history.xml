@@ -8,7 +8,7 @@
     android:paddingBottom="10dp">
 
     <TextView
-        android:id="@+id/tv_winner"
+        android:id="@+id/tv_winner_ad"
         android:layout_width="0dp"
         android:layout_height="37dp"
         android:layout_weight="1"
@@ -19,7 +19,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tv_date"
+        android:id="@+id/tv_date_ad"
         android:layout_width="0dp"
         android:layout_height="37dp"
         android:layout_weight="1"
@@ -29,7 +29,7 @@
         android:textColor="#40AAA5" />
 
     <TextView
-        android:id="@+id/tv_mode"
+        android:id="@+id/tv_mode_ad"
         android:layout_width="0dp"
         android:layout_height="37dp"
         android:layout_weight="1"

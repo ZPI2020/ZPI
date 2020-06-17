@@ -7,6 +7,58 @@
     android:layout_height="match_parent"
     tools:context=".Activity_game">
 
+    <LinearLayout
+        android:id="@+id/game_details"
+        android:layout_width="0dp"
+        android:layout_height="105dp"
+        android:background="@drawable/match_details"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/image_game_notification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.129">
+
+        <TextView
+            android:id="@+id/tv_lvl"
+            android:layout_width="137dp"
+            android:layout_height="82dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/retro"
+            android:gravity="center"
+            android:text="TEKST"
+            android:textColor="#40AAA5"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_moves"
+            android:layout_width="137dp"
+            android:layout_height="82dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/retro"
+            android:gravity="center"
+
+            android:text="TextView"
+            android:textColor="#40AAA5"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="137dp"
+            android:layout_height="82dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/retro"
+
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#40AAA5"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
     <com.example.myapplication.Game_Board_View
         android:id="@+id/gameBoardView"
         android:layout_width="match_parent"
@@ -18,8 +70,10 @@
         app:layout_constraintDimensionRatio="1:1
 "
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.885" />
 
     <ImageView
         android:id="@+id/image_game_notification"
@@ -28,21 +82,22 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
         android:clickable="false"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/gameBoardView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.842"
         app:srcCompat="@drawable/logo" />
 
     <Button
         android:id="@+id/btn_undo_move"
-        android:layout_width="92dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/icon_back"
         android:onClick="undoMoveClick"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,10 +105,10 @@
 
     <Button
         android:id="@+id/btn_restart_game"
-        android:layout_width="92dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/icon_restart"
         android:onClick="restartGameClick"
         app:layout_constraintBottom_toBottomOf="parent"

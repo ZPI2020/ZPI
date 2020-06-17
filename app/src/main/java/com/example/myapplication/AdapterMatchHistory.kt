@@ -23,11 +23,11 @@ class AdapterMatchHistory(private var match_list :ArrayList<GameLog>):
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view)
     {
         val item = view.findViewById<LinearLayout>(R.id.match_list_item)
-        var tv_winner = view.findViewById<TextView>(R.id.tv_winner)
+        var tv_winner = view.findViewById<TextView>(R.id.tv_winner_ad)
         //val typeface = Typeface.createFromAsset(assets, "fonts/yourfont.ttf")
 
-        val tv_date = view.findViewById<TextView>(R.id.tv_date)
-        val tv_mode = view.findViewById<TextView>(R.id.tv_mode)
+        val tv_date = view.findViewById<TextView>(R.id.tv_date_ad)
+        val tv_mode = view.findViewById<TextView>(R.id.tv_mode_ad)
 
 
         fun bindOnClickListener(onClickListener: OnClickListener?, index: Int)

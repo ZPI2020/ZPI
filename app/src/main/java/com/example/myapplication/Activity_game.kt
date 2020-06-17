@@ -24,7 +24,9 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
         val gb_size_mode = sharedPref.getInt("SIZE", 0)
         val fm_mode = sharedPref.getInt("FIRSTMOVE", 0)
         val game_mode = intent.extras?.getInt("GAMEMODE") ?: 0
-
+        tv_lvl.text="MODE:\nMEDIUM"
+        tv_moves.text="MOVES:\n0"
+        tv_time.text="TIME:\n0:00"
         presenter = GamePresenter(this, fm_mode, gb_size_mode, game_mode)
     }
 
