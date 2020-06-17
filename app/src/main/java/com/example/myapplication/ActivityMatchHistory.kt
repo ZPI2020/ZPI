@@ -49,10 +49,11 @@ class ActivityMatchHistory : AppCompatActivity(),AdapterMatchHistory.OnClickList
     override fun onResume() {
         super.onResume()
         match_details.visibility= View.GONE
-
+        matches_recycler.visibility= View.VISIBLE
     }
 
     override fun onItemClick(index: Int) {
+        matches_recycler.visibility= View.INVISIBLE
         match_details.visibility= View.VISIBLE
         match_details.tv_date.text=matches[index].date
         match_details.tv_mode.text=matches[index].diffLevel
