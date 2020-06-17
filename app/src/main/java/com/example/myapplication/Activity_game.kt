@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.myapplication.Game_Board_View.PositionClickedListener
@@ -25,19 +26,25 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
         val game_mode = intent.extras?.getInt("GAMEMODE") ?: 0
 
         presenter = GamePresenter(this, fm_mode, gb_size_mode, game_mode)
+    }
+
+    override fun onStart() {
+        super.onStart()
         presenter?.startGame()
     }
 
     override fun onPositionClicked(x: Int, y: Int) {
-        TODO("not implemented")
+        Log.i("X", x.toString())
+        Log.i("Y", y.toString())
+        presenter?.onBoardClick(x, y)
     }
 
     fun undoMoveClick(view: View){
-        TODO("not implemented")
+        presenter?.undoMove()
     }
 
     fun restartGameClick(view: View){
-        TODO("not implemented")
+        presenter?.restartGame()
     }
 
     override fun drawWinningPositions(arr:Array<Pair<Int,Int>>){

@@ -1,11 +1,14 @@
 package com.example.myapplication
 
+import android.util.Log
+
 class GameStateRegister(private val game: MetaGame) {
     private val gameStates = mutableListOf<GameState>()
 
     fun saveState() {
         val state = getCurrentState() ?: return
         if (!isAlreadySaved(state)) gameStates.add(state)
+        Log.i("states", gameStates.size.toString())
     }
 
     private fun getCurrentState(): GameState? {
@@ -28,5 +31,9 @@ class GameStateRegister(private val game: MetaGame) {
     private fun pullLastState(): GameState? {
         return if (gameStates.isNotEmpty()) gameStates.removeAt(gameStates.lastIndex)
         else null
+    }
+
+    fun clearRegistry() {
+        gameStates.clear()
     }
 }
