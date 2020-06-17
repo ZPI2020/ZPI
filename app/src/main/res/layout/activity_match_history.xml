@@ -59,32 +59,35 @@
                 android:id="@+id/tv_winner"
                 android:layout_width="0dp"
                 android:layout_height="37dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:fontFamily="@font/retro"
                 android:gravity="center"
                 android:text="TEKST"
                 android:textColor="#40AAA5"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="0dp"
                 android:layout_height="37dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:fontFamily="@font/retro"
-                android:textSize="18sp"
                 android:gravity="center"
-                android:textColor="#40AAA5" />
+                android:textColor="#40AAA5"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_mode"
                 android:layout_width="0dp"
                 android:layout_height="37dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:fontFamily="@font/retro"
-                android:textSize="18sp"
                 android:gravity="center"
-                android:textColor="#40AAA5" />
+                android:textColor="#40AAA5"
+                android:textSize="15sp" />
             >
         </LinearLayout>
     </LinearLayout>

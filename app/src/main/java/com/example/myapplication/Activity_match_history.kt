@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_match_history.*
 import kotlinx.android.synthetic.main.activity_match_history.view.*
+import kotlinx.android.synthetic.main.activity_match_history_popup.*
 
 
 class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickListener {
@@ -40,7 +42,7 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
 //            intArrayOf(0,0,0,0,0,0,0,0)
 //        )
 //        matches.add(GameLog("today","hard","you",arr))
-        val adapter =  AdapterMatchHistory(matches)
+        val adapter =  AdapterMatchHistory(matches,this)
 
         adapter.setOnClickListener(this)
         matches_rv.adapter = adapter
@@ -56,7 +58,9 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
         match_details.visibility= View.VISIBLE
         match_details.tv_date.text=matches[index].date
         match_details.tv_mode.text=matches[index].diffLevel
-        match_details.tv_winner.text=matches[index].winner
+        match_details.tv_winner.text=matches[index].winner+" WON"
+        val resID = this.resources.getIdentifier("lost_match", "drawable", this.packageName)
+        match_details.background= ActivityCompat.getDrawable(this,resID)
         val gameBoardArray = matches[index].board
         val popup = Activity_match_history_popup()
 

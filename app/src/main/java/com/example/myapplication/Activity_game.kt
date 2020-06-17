@@ -1,20 +1,35 @@
 package com.example.myapplication
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
 import android.view.View
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Game_Board_View.PositionClickedListener
 import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
+import java.util.concurrent.TimeUnit
+
 
 class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresenter.GameListener {
 
     private var presenter: GamePresenter? = null
+    var sec_timer=0
+    var timer = object: CountDownTimer(3600000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            sec_timer+=1000
 
+            val time_string=String.format("%02d:%02d", (sec_timer/1000) / 60, (sec_timer/1000) % 60)
+            tv_time.text="TIME:\n"+time_string
+        }
+
+        override fun onFinish() {
+            tv_time.text="TIME:\nETERNITY"
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -24,10 +39,19 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
         val gb_size_mode = sharedPref.getInt("SIZE", 0)
         val fm_mode = sharedPref.getInt("FIRSTMOVE", 0)
         val game_mode = intent.extras?.getInt("GAMEMODE") ?: 0
+        resetTimer()
         tv_lvl.text="MODE:\nMEDIUM"
         tv_moves.text="MOVES:\n0"
         tv_time.text="TIME:\n0:00"
+
         presenter = GamePresenter(this, fm_mode, gb_size_mode, game_mode)
+    }
+    fun resetTimer() {
+        timer.cancel()
+        tv_time.text="TIME:\n0:00"
+
+        timer.start()
+
     }
 
     override fun onStart() {
@@ -66,6 +90,7 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
     }
 
     override fun gameBoardNewGame(){
+        resetTimer()
         gameBoardView.resetGame()
     }
 

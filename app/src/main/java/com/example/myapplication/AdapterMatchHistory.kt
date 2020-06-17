@@ -1,14 +1,17 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_match_history_popup.*
 
-class AdapterMatchHistory(private var match_list :ArrayList<GameLog>):
+class AdapterMatchHistory(private var match_list :ArrayList<GameLog>, val ctx: Context):
     RecyclerView.Adapter<AdapterMatchHistory.ViewHolder>() {
 
     private var onClickListener: OnClickListener? = null
@@ -49,9 +52,14 @@ class AdapterMatchHistory(private var match_list :ArrayList<GameLog>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tv_winner.text = match_list[position].winner
+        holder.tv_winner.text = match_list[position].winner+" WON"
         holder.tv_date.text = match_list[position].date
         holder.tv_mode.text = match_list[position].diffLevel
+        if(match_list[position].winner.equals("AI")){
+
+            val resID = ctx.resources.getIdentifier("lost_match", "drawable", ctx.packageName)
+            holder.item.background= ActivityCompat.getDrawable(ctx,resID)
+        }
         holder.bindOnClickListener(onClickListener,position)
 
 
