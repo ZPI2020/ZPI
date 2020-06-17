@@ -59,8 +59,11 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
         match_details.tv_date.text=matches[index].date
         match_details.tv_mode.text=matches[index].diffLevel
         match_details.tv_winner.text=matches[index].winner+" WON"
-        val resID = this.resources.getIdentifier("lost_match", "drawable", this.packageName)
-        match_details.background= ActivityCompat.getDrawable(this,resID)
+        if(matches[index].winner.equals("AI")){
+            val resID = this.resources.getIdentifier("lost_match", "drawable", this.packageName)
+            match_details.background= ActivityCompat.getDrawable(this,resID)
+        }
+
         val gameBoardArray = matches[index].board
         val popup = Activity_match_history_popup()
 

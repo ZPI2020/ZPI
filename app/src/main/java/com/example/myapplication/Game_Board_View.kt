@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.os.Handler
+import androidx.core.os.postDelayed
 import kotlin.math.abs
 
 class Game_Board_View : View {
@@ -50,21 +51,38 @@ class Game_Board_View : View {
             }
         }
     }
+
     fun drawWiningLine(canvas: Canvas?){
         var paint = Paint()
-        paint.color = Color.RED
-        paint.strokeWidth=10f
+        var paint1 = Paint()
+        var paint2 = Paint()
+        paint.color = (Color.argb(255,140, 43, 140))
+        paint.strokeWidth=16f
+        paint1.color = (Color.argb(255,190, 100, 190))
+        paint1.strokeWidth=10f
+        paint2.color = (Color.argb(255,215, 145, 215))
+        paint2.strokeWidth=4f
          startX = xPositions?.get(winingPoints[0].first)
          startY = yPositions?.get(winingPoints[0].second)
+        val endX = xPositions?.get(winingPoints[1].first)
+        val endY = yPositions?.get(winingPoints[1].second)
+        canvas!!.drawCircle(startX!!, startY!!, 8f,paint)
+        canvas!!.drawCircle(endX!!, endY!!,8f, paint)
+        canvas!!.drawCircle(startX!!, startY!!, 5f,paint1)
+        canvas!!.drawCircle(endX!!, endY!!,6f, paint1)
+        canvas!!.drawCircle(startX!!, startY!!, 2f,paint2)
+        canvas!!.drawCircle(endX!!, endY!!,2f, paint2)
 
-        val xAdd = (xPositions?.get(winingPoints[1].first)?.minus(startX!!))!!/(50)
-        val yAdd = (yPositions?.get(winingPoints[1].second)?.minus(startY!!)!!/(50))
+        val xAdd = (xPositions?.get(winingPoints[1].first)?.minus(startX!!))!!/(7)
+        val yAdd = (yPositions?.get(winingPoints[1].second)?.minus(startY!!)!!/(7))
 
-        if(drawingIteration!!<50){
+        if(drawingIteration!!<8){
             canvas!!.drawLine(startX!!,startY!!,startX!!+(drawingIteration!!*xAdd!!),startY!!+(drawingIteration!!*yAdd!!),paint)
+            canvas!!.drawLine(startX!!,startY!!,startX!!+(drawingIteration!!*xAdd!!),startY!!+(drawingIteration!!*yAdd!!),paint1)
+            canvas!!.drawLine(startX!!,startY!!,startX!!+(drawingIteration!!*xAdd!!),startY!!+(drawingIteration!!*yAdd!!),paint2)
             drawingIteration = drawingIteration!!+1
-            if(drawingIteration!!<50){
-                Handler().postDelayed({invalidate()},20)
+            if(drawingIteration!!<8){
+                Handler().postDelayed({invalidate()},0)
             }
 
         }

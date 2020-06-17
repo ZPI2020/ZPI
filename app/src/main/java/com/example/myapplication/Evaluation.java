@@ -8,7 +8,6 @@ public class Evaluation {
 
     //map of patterns and their value
     public HashMap<String, Integer> patterns = new HashMap<String, Integer>() {{
-        //offence
         put("22222", 100000);
         put("022220", 10000);
         put("02220", 1000);
@@ -38,11 +37,11 @@ public class Evaluation {
         //defence
         put("11111", -110000);  //extra
         put("011110", -11000);  //extra
-        put("01110", -1000);
+        put("01110", -1100);   //extra
         put("01100", -100);
         put("00110", -100);
 
-        put("211110", -1000);
+        put("211110", -1100);  //extra
         put("201110", -900);
         put("211101", -900);
         put("211100", -100);
@@ -61,6 +60,9 @@ public class Evaluation {
         put("011002", -10);
 
         put("10101", -100);
+
+        put("211112",10000);  //to boost low bot
+        put("122221",-10000); //to boost low bot
     }};
 
     //returns board score for computer

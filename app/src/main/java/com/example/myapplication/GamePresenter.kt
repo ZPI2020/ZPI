@@ -116,6 +116,9 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         movesCounter--
         updateMovesCounter()
     }
+    fun refreshWiningLine(){
+        if(game.isGameOver())drawWinningLine()
+    }
 
     fun onBoardClick(row: Int, column: Int) {
         if (!isMoveValid(row, column)) return
