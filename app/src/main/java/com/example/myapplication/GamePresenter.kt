@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Context
+import kotlin.math.max
 import kotlin.math.roundToInt
 
 class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMode: Int, private val gameMode: Int): TaskCaller {
@@ -14,6 +15,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
     private lateinit var player2: Player
     private var moveLock = true
     private var movesCounter = 0
+        set(value) { field = max(value, 0) }
 
     init {
         when (gameMode) {
@@ -172,7 +174,8 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
 
     private fun drawWinningLine() {
         val fields = findFiveConnected()
-        game_ui.drawWinningPositions(arrayOf(fields.first(), fields.last()))
+        if (fields.isNotEmpty())
+            game_ui.drawWinningPositions(arrayOf(fields.first(), fields.last()))
     }
 
     private fun saveGameToHistory() {

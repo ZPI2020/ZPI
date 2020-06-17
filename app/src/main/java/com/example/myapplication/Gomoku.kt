@@ -45,7 +45,7 @@ class Gomoku(gameBoard: GameBoard, token1: Token, token2: Token, firstTurn: Toke
             }
         }
         for (c in 0 until gameBoard.columns-4) {
-            for (r in 3 until gameBoard.rows) {
+            for (r in 4 until gameBoard.rows) {
                 if (gameBoard.getToken(r, c) == checkToken &&
                     gameBoard.getToken(r-1, c+1) == checkToken &&
                     gameBoard.getToken(r-2, c+2) == checkToken &&
