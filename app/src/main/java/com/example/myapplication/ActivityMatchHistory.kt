@@ -62,7 +62,7 @@ class ActivityMatchHistory : AppCompatActivity(),AdapterMatchHistory.OnClickList
             match_details.background= ActivityCompat.getDrawable(this,resID)
         }
         else{
-            val resID = this.resources.getIdentifier("button_design", "drawable", this.packageName)
+            val resID = this.resources.getIdentifier("match_details", "drawable", this.packageName)
             match_details.background= ActivityCompat.getDrawable(this,resID)
         }
 
