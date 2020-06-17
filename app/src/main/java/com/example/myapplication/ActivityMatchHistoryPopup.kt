@@ -1,16 +1,13 @@
 package com.example.myapplication
 
 import android.app.Activity
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.style.BackgroundColorSpan
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_match_history_popup.*
 
-class Activity_match_history_popup  : Activity(), Game_Board_View.PositionClickedListener {
+class ActivityMatchHistoryPopup  : Activity(), GameBoardView.PositionClickedListener {
 
     lateinit var gameboard : Array<IntArray>
     override fun onCreate(savedInstanceState: Bundle?) {

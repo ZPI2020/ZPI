@@ -3,17 +3,15 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_match_history.*
 import kotlinx.android.synthetic.main.activity_match_history.view.*
-import kotlinx.android.synthetic.main.activity_match_history_popup.*
 
 
-class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickListener {
+class ActivityMatchHistory : AppCompatActivity(),AdapterMatchHistory.OnClickListener {
 
     var matches=ArrayList<GameLog>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +63,7 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
         }
 
         val gameBoardArray = matches[index].board
-        val popup = Activity_match_history_popup()
+        val popup = ActivityMatchHistoryPopup()
 
 
         val intent = Intent(this, popup::class.java)

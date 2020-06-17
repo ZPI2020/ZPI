@@ -95,6 +95,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         game.resetGame()
         register.clearRegistry()
         checkForAIMove()
+        game_ui.gameBoardNewGame()
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
         updateMoveInfo()
         updateMovesCounter()

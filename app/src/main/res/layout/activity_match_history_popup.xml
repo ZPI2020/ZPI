@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_match_history_popup">
+    tools:context=".ActivityMatchHistoryPopup">
 
-    <com.example.myapplication.Game_Board_View
+    <com.example.myapplication.GameBoardView
         android:id="@+id/popupGameBoard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

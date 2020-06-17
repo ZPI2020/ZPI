@@ -9,12 +9,12 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity_match_history_popup" android:theme="@style/AppTheme.Transparent" android:screenOrientation="nosensor"></activity>
-        <activity android:name=".Activity_game" android:screenOrientation="nosensor"
+        <activity android:name=".ActivityMatchHistoryPopup" android:theme="@style/AppTheme.Transparent" android:screenOrientation="nosensor"></activity>
+        <activity android:name=".ActivityGame" android:screenOrientation="nosensor"
             />
-        <activity android:name=".Activity_match_history" android:screenOrientation="nosensor" />
-        <activity android:name=".Activity_settings" android:screenOrientation="nosensor" />
-        <activity android:name=".Activity_main_menu" android:screenOrientation="nosensor">
+        <activity android:name=".ActivityMatchHistory" android:screenOrientation="nosensor" />
+        <activity android:name=".ActivitySettings" android:screenOrientation="nosensor" />
+        <activity android:name=".ActivityMainMenu" android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

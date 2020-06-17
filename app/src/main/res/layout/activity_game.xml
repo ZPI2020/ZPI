@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/gradient"
     android:layout_height="match_parent"
-    tools:context=".Activity_game">
+    tools:context=".ActivityGame">
 
     <LinearLayout
         android:id="@+id/game_details"
@@ -59,7 +59,7 @@
 
     </LinearLayout>
 
-    <com.example.myapplication.Game_Board_View
+    <com.example.myapplication.GameBoardView
         android:id="@+id/gameBoardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

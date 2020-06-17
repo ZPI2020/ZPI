@@ -4,17 +4,14 @@ import android.content.Context
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.Game_Board_View.PositionClickedListener
+import com.example.myapplication.GameBoardView.PositionClickedListener
 import kotlinx.android.synthetic.main.activity_game.*
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 
-class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresenter.GameListener {
+class ActivityGame : AppCompatActivity(), PositionClickedListener, GamePresenter.GameListener {
 
     private var presenter: GamePresenter? = null
     var sec_timer=0

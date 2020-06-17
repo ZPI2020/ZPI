@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main_menu.*
 
 
-class Activity_main_menu : AppCompatActivity() {
+class ActivityMainMenu : AppCompatActivity() {
     var mode=0;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,15 +73,15 @@ class Activity_main_menu : AppCompatActivity() {
     }
 
     fun goToSettings(view: View?) {
-        val intent = Intent(this, Activity_settings::class.java)
+        val intent = Intent(this, ActivitySettings::class.java)
         startActivity(intent)
     }
     fun goToMatchHistory(view: View?) {
-        val intent = Intent(this, Activity_match_history::class.java)
+        val intent = Intent(this, ActivityMatchHistory::class.java)
         startActivity(intent)
     }
     fun goToGame(view: View?) {
-        val intent = Intent(this, Activity_game::class.java)
+        val intent = Intent(this, ActivityGame::class.java)
         intent.putExtra("GAMEMODE", mode)
         startActivity(intent)
     }

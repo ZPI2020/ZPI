@@ -14,7 +14,7 @@ import android.os.Handler
 import androidx.core.os.postDelayed
 import kotlin.math.abs
 
-class Game_Board_View : View {
+class GameBoardView : View {
 
     constructor(ctx: Context) : super(ctx)
     constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs)

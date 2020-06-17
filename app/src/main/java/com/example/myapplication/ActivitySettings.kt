@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 
-class Activity_settings : AppCompatActivity() {
+class ActivitySettings : AppCompatActivity() {
     var gb_size_mode = 0
     var fm_mode = 0
     override fun onCreate(savedInstanceState: Bundle?) {
