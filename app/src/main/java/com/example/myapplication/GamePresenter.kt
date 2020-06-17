@@ -51,6 +51,8 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         fun getContext(): Context
         fun setModeInfo(modeInfo: String)
         fun updateMovesCounter(moves: Int)
+        fun resetTimer()
+        fun stopTimer()
     }
 
     private fun getFirstMove(fmMode: Int): Token {
@@ -76,6 +78,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
         updateMoveInfo()
         updateMovesCounter()
+        game_ui.resetTimer()
     }
 
     private fun setModeInfo() {
@@ -95,6 +98,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
         updateMoveInfo()
         updateMovesCounter()
+        game_ui.resetTimer()
     }
 
     private fun checkForAIMove() {
@@ -140,6 +144,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
     private fun onGameOver() {
         moveLock = true
         saveGameToHistory()
+        game_ui.stopTimer()
 
         if (game.getWinner() == player1.token) {
             if (player2 is HumanPlayer)

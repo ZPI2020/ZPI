@@ -39,24 +39,23 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
         val gb_size_mode = sharedPref.getInt("SIZE", 0)
         val fm_mode = sharedPref.getInt("FIRSTMOVE", 0)
         val game_mode = intent.extras?.getInt("GAMEMODE") ?: 0
-        resetTimer()
+
         tv_lvl.text="MODE:\nMEDIUM"
         tv_moves.text="MOVES:\n0"
         tv_time.text="TIME:\n0:00"
 
         presenter = GamePresenter(this, fm_mode, gb_size_mode, game_mode)
+        presenter?.startGame()
     }
-    fun resetTimer() {
+    override fun resetTimer() {
+        sec_timer = 0
         timer.cancel()
         tv_time.text="TIME:\n0:00"
-
         timer.start()
-
     }
 
-    override fun onStart() {
-        super.onStart()
-        presenter?.startGame()
+    override fun stopTimer() {
+        timer.cancel()
     }
 
     override fun onPositionClicked(x: Int, y: Int) {
@@ -156,7 +155,7 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
     }
 
     override fun showYouWin(){
-        image_game_notification.setImageResource(R.drawable.your_move)
+        image_game_notification.setImageResource(R.drawable.you_win)
         image_game_notification.visibility=View.VISIBLE
 //        Handler().postDelayed({
 //            image_game_notification.visibility = View.INVISIBLE
