@@ -151,8 +151,8 @@ class Game_Board_View : View {
         val paint2 = Paint()
         paint2.setColor(Color.WHITE)
         var positionVal = 0
-        for (x in 0 until gameboardSize!!-1){
-            for(y in 0 until gameboardSize!!-1){
+        for (x in 0 until gameboardSize!!){
+            for(y in 0 until gameboardSize!!){
                 positionVal=gameBoardArray[x][y]
                 if(positionVal==1){
                     //canvas!!.drawCircle(xPositions?.get(x)!!, yPositions?.get(y)!!,circleRadius,paint1)
@@ -199,10 +199,10 @@ class Game_Board_View : View {
         drawingIteration = 1
     }
     fun getPositionOF(x:Float,y:Float): Pair<Int,Int>{
-        var xpos =0
-        var ypos=0
+        var xpos = -1
+        var ypos = -1
         var absolut = Float.MAX_VALUE
-        var value = 0f
+        var value = Float.MIN_VALUE
         for(xi in 0 until xPositions!!.size){
             value = abs(this!!.xPositions?.get(xi)!!-x )
             if(value<absolut){
@@ -232,19 +232,19 @@ class Game_Board_View : View {
             MotionEvent.ACTION_DOWN -> {
                 if(::gameBoardArray.isInitialized){
                 pos = getPositionOF(x,y)}
-                positionClickedListener?.onPositionClicked(pos.first, pos.second)
+                positionClickedListener?.onPositionClicked(pos.first,pos.second)
                 touching = true
             }
             MotionEvent.ACTION_MOVE -> {
             }
             MotionEvent.ACTION_UP -> {
-                touching = false
-                if(::gameBoardArray.isInitialized) {
-                    val (finalX1, finalY1) = getPositionOF(x, y)
-                    if ((finalX1 == pos.first) && (finalY1 == pos.second)) { // Jezeli pozycja startowa rowna sie z koncowa
-                        positionClickedListener?.onPositionClicked(pos.first, pos.second)
-                    }
-                }
+//                touching = false
+//                if(::gameBoardArray.isInitialized) {
+//                    val (finalX1, finalY1) = getPositionOF(x, y)
+//                    if ((finalX1 == pos.first) && (finalY1 == pos.second)) {
+//                        positionClickedListener?.onPositionClicked(pos.first, pos.second)
+//                    }
+//                }
             }
             MotionEvent.ACTION_CANCEL -> {
                 touching = false
