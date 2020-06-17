@@ -33,7 +33,15 @@ class GameBoard(val rows: Int, val columns: Int) {
         return boardCopy
     }
 
-    fun equals(gameBoard: GameBoard) = this.board.contentEquals(gameBoard.board)
+    fun equals(gameBoard: GameBoard): Boolean {
+        if (this.size() != gameBoard.size()) return false
+        for (r in 0 until rows) {
+            for (c in 0 until columns)
+                if (getToken(r,c) != gameBoard.getToken(r,c))
+                    return false
+        }
+        return true
+    }
 
     fun getValuesMatrix(): Array<IntArray> =
         board.map { row ->

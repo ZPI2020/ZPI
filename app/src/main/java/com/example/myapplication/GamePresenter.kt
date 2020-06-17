@@ -93,7 +93,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
     }
 
     fun onBoardClick(row: Int, column: Int) {
-        if (row < 0 || column < 0 || moveLock) return
+        if (!isMoveValid(row, column)) return
 
         if (game.currentTurn() == player1.token && player1 is HumanPlayer) {
             register.saveState()
@@ -108,6 +108,9 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         }
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
     }
+
+    private fun isMoveValid(row: Int, column: Int): Boolean =
+        !moveLock && row >= 0 && column >= 0 && game.isMoveEligible(row, column)
 
     private fun onGameOver() {
         // koniec gry

@@ -1,11 +1,14 @@
 package com.example.myapplication
 
+import android.util.Log
+
 class GameStateRegister(private val game: MetaGame) {
     private val gameStates = mutableListOf<GameState>()
 
     fun saveState() {
         val state = getCurrentState() ?: return
         if (!isAlreadySaved(state)) gameStates.add(state)
+        Log.i("states", gameStates.size.toString())
     }
 
     private fun getCurrentState(): GameState? {

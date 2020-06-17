@@ -24,6 +24,8 @@ abstract class MetaGame(
 
     fun getGameBoardCopy(): GameBoard = gameBoard.copy()
 
+    fun isMoveEligible(row: Int, column: Int): Boolean = this.gameBoard.isFieldEmpty(row, column)
+
     fun placeToken(token: Token, row: Int, column: Int) {
         if (validValues(row, column) && isTokenExpected(token) && (gameBoard.isFieldEmpty(row, column))) {
             gameBoard.placeToken(token, row, column)

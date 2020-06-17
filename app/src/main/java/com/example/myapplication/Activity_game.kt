@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.myapplication.Game_Board_View.PositionClickedListener
@@ -33,12 +34,9 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
     }
 
     override fun onPositionClicked(x: Int, y: Int) {
-        //określenie rzedu i kolumny
-        //jesli blad to row == -1, column == -1
-
-        val row = Math.random()*7
-        val column = Math.random()*7
-        presenter?.onBoardClick(row.toInt(), column.toInt())
+        Log.i("X", x.toString())
+        Log.i("Y", y.toString())
+        presenter?.onBoardClick(x, y)
     }
 
     fun undoMoveClick(view: View){
