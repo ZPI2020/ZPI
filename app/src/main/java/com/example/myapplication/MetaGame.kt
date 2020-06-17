@@ -57,6 +57,8 @@ abstract class MetaGame(
 
     fun currentTurn(): Token? = expectedToken
 
+    fun firstTurn() = firstTurn
+
     protected fun gameOver() {
         this.gameOver = true
     }

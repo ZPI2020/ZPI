@@ -13,6 +13,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
     private lateinit var player1: Player
     private lateinit var player2: Player
     private var moveLock = true
+    private var movesCounter = 0
 
     init {
         when (gameMode) {
@@ -48,6 +49,8 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         fun gameBoardNewGame()
         fun drawWinningPositions(arr:Array<Pair<Int,Int>>)
         fun getContext(): Context
+        fun setModeInfo(modeInfo: String)
+        fun updateMovesCounter(moves: Int)
     }
 
     private fun getFirstMove(fmMode: Int): Token {
@@ -67,20 +70,31 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
     }
 
     fun startGame() {
+        setModeInfo()
         checkForAIMove()
         game_ui.gameBoardNewGame()
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
         updateMoveInfo()
+        updateMovesCounter()
+    }
+
+    private fun setModeInfo() {
+        when (gameMode) {
+            0 -> game_ui.setModeInfo("PvP")
+            1 -> game_ui.setModeInfo("EASY")
+            2 -> game_ui.setModeInfo("MEDIUM")
+            3 -> game_ui.setModeInfo("HARD")
+        }
     }
 
     fun restartGame() {
-        if (game.isGameOver()) {
-            game.resetGame()
-            register.clearRegistry()
-            checkForAIMove()
-            game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
-            updateMoveInfo()
-        }
+        movesCounter = 0
+        game.resetGame()
+        register.clearRegistry()
+        checkForAIMove()
+        game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+        updateMoveInfo()
+        updateMovesCounter()
     }
 
     private fun checkForAIMove() {
@@ -95,6 +109,8 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
     fun undoMove() {
         register.recoverLastState()
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+        movesCounter--
+        updateMovesCounter()
     }
 
     fun onBoardClick(row: Int, column: Int) {
@@ -103,16 +119,19 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         if (game.currentTurn() == player1.token && player1 is HumanPlayer) {
             register.saveState()
             (player1 as HumanPlayer).makeMove(row, column)
+            movesCounter++
             if (game.isGameOver()) onGameOver()
             else checkForAIMove()
         }
         else if (game.currentTurn() == player2.token && player2 is HumanPlayer) {
             register.saveState()
             (player2 as HumanPlayer).makeMove(row, column)
+            movesCounter++
             if (game.isGameOver()) onGameOver()
         }
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
         updateMoveInfo()
+        updateMovesCounter()
     }
 
     private fun isMoveValid(row: Int, column: Int): Boolean =
@@ -135,6 +154,13 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
                 game_ui.showAiWins()
         } else
             game_ui.showDraw()
+
+        drawWinningLine()
+    }
+
+    private fun drawWinningLine() {
+        val fields = findFiveConnected()
+        game_ui.drawWinningPositions(arrayOf(fields.first(), fields.last()))
     }
 
     private fun saveGameToHistory() {
@@ -163,13 +189,90 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         }
     }
 
+    private fun updateMovesCounter() {
+        if (game.currentTurn() == game.firstTurn())
+            game_ui.updateMovesCounter(movesCounter/2)
+        else
+            game_ui.updateMovesCounter(movesCounter/2)
+    }
+
     override fun taskCompleted() {
+        movesCounter++
+        updateMovesCounter()
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
+
         if (game.isGameOver())
             onGameOver()
         else {
             moveLock = false
             updateMoveInfo()
         }
+    }
+
+    private fun findFiveConnected(): Array<Pair<Int, Int>> {
+        val winningToken = game.getWinner() ?: return arrayOf()
+        val gameBoard = game.getGameBoardCopy()
+
+        for (c in 0 until gameBoard.columns-4) {
+            for (r in 0 until gameBoard.rows) {
+                if (gameBoard.getToken(r, c) == winningToken &&
+                    gameBoard.getToken(r, c+1) == winningToken &&
+                    gameBoard.getToken(r, c+2) == winningToken &&
+                    gameBoard.getToken(r, c+3) == winningToken &&
+                    gameBoard.getToken(r, c+4) == winningToken)
+                    return arrayOf(
+                        Pair(r,c),
+                        Pair(r,c+1),
+                        Pair(r,c+2),
+                        Pair(r,c+3),
+                        Pair(r,c+4))
+            }
+        }
+        for (c in 0 until gameBoard.columns) {
+            for (r in 0 until gameBoard.rows-4) {
+                if (gameBoard.getToken(r, c) == winningToken &&
+                    gameBoard.getToken(r+1, c) == winningToken &&
+                    gameBoard.getToken(r+2, c) == winningToken &&
+                    gameBoard.getToken(r+3, c) == winningToken &&
+                    gameBoard.getToken(r+4, c) == winningToken)
+                    return arrayOf(
+                        Pair(r,c),
+                        Pair(r+1,c),
+                        Pair(r+2,c),
+                        Pair(r+3,c),
+                        Pair(r+4,c))
+            }
+        }
+        for (c in 0 until gameBoard.columns-4) {
+            for (r in 0 until gameBoard.rows-4) {
+                if (gameBoard.getToken(r, c) == winningToken &&
+                    gameBoard.getToken(r+1, c+1) == winningToken &&
+                    gameBoard.getToken(r+2, c+2) == winningToken &&
+                    gameBoard.getToken(r+3, c+3) == winningToken &&
+                    gameBoard.getToken(r+4, c+4) == winningToken)
+                    return arrayOf(
+                        Pair(r,c),
+                        Pair(r+1,c+1),
+                        Pair(r+2,c+2),
+                        Pair(r+3,c+3),
+                        Pair(r+4,c+4))
+            }
+        }
+        for (c in 0 until gameBoard.columns-4) {
+            for (r in 3 until gameBoard.rows) {
+                if (gameBoard.getToken(r, c) == winningToken &&
+                    gameBoard.getToken(r-1, c+1) == winningToken &&
+                    gameBoard.getToken(r-2, c+2) == winningToken &&
+                    gameBoard.getToken(r-3, c+3) == winningToken &&
+                    gameBoard.getToken(r-4, c+4) == winningToken)
+                    return arrayOf(
+                        Pair(r,c),
+                        Pair(r-1,c+1),
+                        Pair(r-2,c+2),
+                        Pair(r-3,c+3),
+                        Pair(r-4,c+4))
+            }
+        }
+        return return arrayOf()
     }
 }

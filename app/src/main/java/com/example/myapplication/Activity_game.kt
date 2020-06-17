@@ -57,6 +57,14 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
 
     override fun getContext(): Context = this.applicationContext
 
+    override fun setModeInfo(modeInfo: String) {
+        tv_lvl.text = "MODE:\n$modeInfo"
+    }
+
+    override fun updateMovesCounter(moves: Int) {
+        tv_moves.text = "MOVES:\n${moves.toString()}"
+    }
+
     override fun gameBoardNewGame(){
         gameBoardView.resetGame()
     }
@@ -64,57 +72,57 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
     override fun showYourMove(){
         image_game_notification.setImageResource(R.drawable.your_move)
         image_game_notification.visibility=View.VISIBLE
-        Handler().postDelayed({
-            image_game_notification.visibility = View.INVISIBLE
-        }, 700)
+//        Handler().postDelayed({
+//            image_game_notification.visibility = View.INVISIBLE
+//        }, 700)
     }
 
     override fun showDraw() {
         image_game_notification.setImageResource(R.drawable.text_draw)
         image_game_notification.visibility=View.VISIBLE
-        Handler().postDelayed({
-            image_game_notification.visibility = View.INVISIBLE
-        }, 2000)
+//        Handler().postDelayed({
+//            image_game_notification.visibility = View.INVISIBLE
+//        }, 2000)
     }
 
     override fun showPlayer1Move(){
         image_game_notification.setImageResource(R.drawable.player1_move)
         image_game_notification.visibility=View.VISIBLE
-        Handler().postDelayed({
-            image_game_notification.visibility = View.INVISIBLE
-        }, 700)
+//        Handler().postDelayed({
+//            image_game_notification.visibility = View.INVISIBLE
+//        }, 700)
     }
 
     override fun showPlayer1Wins(){
         image_game_notification.setImageResource(R.drawable.player1_wins)
         image_game_notification.visibility=View.VISIBLE
-        Handler().postDelayed({
-            image_game_notification.visibility = View.INVISIBLE
-        }, 2000)
+//        Handler().postDelayed({
+//            image_game_notification.visibility = View.INVISIBLE
+//        }, 2000)
     }
 
     override fun showPlayer2Move(){
         image_game_notification.setImageResource(R.drawable.player2_move)
         image_game_notification.visibility=View.VISIBLE
-        Handler().postDelayed({
-            image_game_notification.visibility = View.INVISIBLE
-        }, 700)
+//        Handler().postDelayed({
+//            image_game_notification.visibility = View.INVISIBLE
+//        }, 700)
     }
 
     override fun showPlayer2Wins(){
         image_game_notification.setImageResource(R.drawable.player2_wins)
         image_game_notification.visibility=View.VISIBLE
-        Handler().postDelayed({
-            image_game_notification.visibility = View.INVISIBLE
-        }, 2000)
+//        Handler().postDelayed({
+//            image_game_notification.visibility = View.INVISIBLE
+//        }, 2000)
     }
 
     override fun showAiWins(){
         image_game_notification.setImageResource(R.drawable.ai_wins)
         image_game_notification.visibility=View.VISIBLE
-        Handler().postDelayed({
-            image_game_notification.visibility = View.INVISIBLE
-        }, 2000)
+//        Handler().postDelayed({
+//            image_game_notification.visibility = View.INVISIBLE
+//        }, 2000)
     }
 
     override fun setBoard(board : Array<IntArray>){
@@ -125,8 +133,8 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
     override fun showYouWin(){
         image_game_notification.setImageResource(R.drawable.your_move)
         image_game_notification.visibility=View.VISIBLE
-        Handler().postDelayed({
-            image_game_notification.visibility = View.INVISIBLE
-        }, 2000)
+//        Handler().postDelayed({
+//            image_game_notification.visibility = View.INVISIBLE
+//        }, 2000)
     }
 }

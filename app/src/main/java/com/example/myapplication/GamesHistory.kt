@@ -11,10 +11,10 @@ class GamesHistory {
     private val FILE_NAME = "history.txt"
 
     fun save(diffLevel: String, winner: String, board: Array<IntArray>, ctx: Context) {
-//        val fw = FileWriter(FILE_NAME, true)
         val fw = ctx.openFileOutput(FILE_NAME, MODE_APPEND)
+        val calendar = java.util.Calendar.getInstance()
 
-        fw.write(("date:" + Calendar.YEAR + "/" + Calendar.MONTH + "/" + Calendar.DAY_OF_MONTH + "\n").toByteArray())
+        fw.write(("date:" + calendar.get(Calendar.YEAR) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "\n").toByteArray())
         fw.write("difficulty:$diffLevel\n".toByteArray())
         fw.write("winner:$winner\n".toByteArray())
         fw.write(("board:" + board.joinToString("") { it.joinToString("") } + "\n").toByteArray())
