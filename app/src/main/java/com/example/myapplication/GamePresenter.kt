@@ -1,8 +1,9 @@
 package com.example.myapplication
 
+import android.content.Context
 import kotlin.math.roundToInt
 
-class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMode: Int, gameMode: Int): TaskCaller {
+class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMode: Int, private val gameMode: Int): TaskCaller {
 
     private val token1 = Token(1)
     private val token2 = Token(2)
@@ -46,6 +47,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         fun showDraw()
         fun gameBoardNewGame()
         fun drawWinningPositions(arr:Array<Pair<Int,Int>>)
+        fun getContext(): Context
     }
 
     private fun getFirstMove(fmMode: Int): Token {
@@ -118,6 +120,8 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
 
     private fun onGameOver() {
         moveLock = true
+        saveGameToHistory()
+
         if (game.getWinner() == player1.token) {
             if (player2 is HumanPlayer)
                 game_ui.showPlayer1Wins()
@@ -131,6 +135,20 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
                 game_ui.showAiWins()
         } else
             game_ui.showDraw()
+    }
+
+    private fun saveGameToHistory() {
+        val winner = when {
+            game.getWinner() == player1.token -> "PLAYER"
+            game.getWinner() == player2.token -> "AI"
+            else -> "DRAW"
+        }
+
+        when (gameMode) {
+            1 -> history.save("EASY", winner, game.getGameBoardCopy().getValuesMatrix(), game_ui.getContext())
+            2 -> history.save("MEDIUM", winner, game.getGameBoardCopy().getValuesMatrix(), game_ui.getContext())
+            3 -> history.save("HARD", winner, game.getGameBoardCopy().getValuesMatrix(), game_ui.getContext())
+        }
     }
 
     private fun updateMoveInfo() {

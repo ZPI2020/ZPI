@@ -26,22 +26,20 @@ class Activity_match_history : AppCompatActivity(),AdapterMatchHistory.OnClickLi
             matches=loader.load(this)
         }
         catch(e:Exception){
-
             no_match_text.visibility= View.VISIBLE
         }
 
-
-        val arr:Array<IntArray> = arrayOf(
-            intArrayOf(0,0,0,0,0,0,0,0),
-            intArrayOf(0,0,0,2,0,0,0,0),
-            intArrayOf(0,0,0,2,0,0,0,0),
-            intArrayOf(0,0,0,2,1,0,0,0),
-            intArrayOf(0,0,0,2,0,0,0,0),
-            intArrayOf(0,0,0,2,0,0,0,0),
-            intArrayOf(0,0,0,0,0,0,0,0),
-            intArrayOf(0,0,0,0,0,0,0,0)
-        )
-        matches.add(GameLog("today","hard","you",arr))
+//        val arr:Array<IntArray> = arrayOf(
+//            intArrayOf(0,0,0,0,0,0,0,0),
+//            intArrayOf(0,0,0,2,0,0,0,0),
+//            intArrayOf(0,0,0,2,0,0,0,0),
+//            intArrayOf(0,0,0,2,1,0,0,0),
+//            intArrayOf(0,0,0,2,0,0,0,0),
+//            intArrayOf(0,0,0,2,0,0,0,0),
+//            intArrayOf(0,0,0,0,0,0,0,0),
+//            intArrayOf(0,0,0,0,0,0,0,0)
+//        )
+//        matches.add(GameLog("today","hard","you",arr))
         val adapter =  AdapterMatchHistory(matches)
 
         adapter.setOnClickListener(this)

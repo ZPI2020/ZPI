@@ -53,6 +53,8 @@ class Activity_game : AppCompatActivity(), PositionClickedListener, GamePresente
         gameBoardView.invalidate()
     }
 
+    override fun getContext(): Context = this.applicationContext
+
     override fun gameBoardNewGame(){
         gameBoardView.resetGame()
     }
