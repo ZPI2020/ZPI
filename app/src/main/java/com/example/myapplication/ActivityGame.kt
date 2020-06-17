@@ -44,6 +44,12 @@ class ActivityGame : AppCompatActivity(), PositionClickedListener, GamePresenter
         presenter = GamePresenter(this, fm_mode, gb_size_mode, game_mode)
         presenter?.startGame()
     }
+
+    override fun onStart() {
+        super.onStart()
+        presenter?.startGame()
+        presenter?.refreshWiningLine()
+    }
     override fun resetTimer() {
         sec_timer = 0
         timer.cancel()

@@ -60,6 +60,11 @@ class AdapterMatchHistory(private var match_list :ArrayList<GameLog>, val ctx: C
             val resID = ctx.resources.getIdentifier("lost_match", "drawable", ctx.packageName)
             holder.item.background= ActivityCompat.getDrawable(ctx,resID)
         }
+        else{
+            val resID = ctx.resources.getIdentifier("button_design", "drawable", ctx.packageName)
+            holder.item.background= ActivityCompat.getDrawable(ctx,resID)
+
+        }
         holder.bindOnClickListener(onClickListener,position)
 
 

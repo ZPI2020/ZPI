@@ -61,6 +61,10 @@ class ActivityMatchHistory : AppCompatActivity(),AdapterMatchHistory.OnClickList
             val resID = this.resources.getIdentifier("lost_match", "drawable", this.packageName)
             match_details.background= ActivityCompat.getDrawable(this,resID)
         }
+        else{
+            val resID = this.resources.getIdentifier("button_design", "drawable", this.packageName)
+            match_details.background= ActivityCompat.getDrawable(this,resID)
+        }
 
         val gameBoardArray = matches[index].board
         val popup = ActivityMatchHistoryPopup()

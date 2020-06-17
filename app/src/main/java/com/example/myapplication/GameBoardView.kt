@@ -228,6 +228,8 @@ class GameBoardView : View {
                 absolut = value
             }
         }
+        absolut = Float.MAX_VALUE
+        value = Float.MIN_VALUE
         for(xi in 0 until yPositions!!.size){
             value = abs(this!!.yPositions!![xi]-y )
             if(value<absolut){
@@ -265,7 +267,7 @@ class GameBoardView : View {
 //                }
             }
             MotionEvent.ACTION_CANCEL -> {
-                touching = false
+               // touching = false
             }
 
         }
