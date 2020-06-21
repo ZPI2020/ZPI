@@ -55,6 +55,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         fun updateMovesCounter(moves: Int)
         fun resetTimer()
         fun stopTimer()
+        fun startTimer()
     }
 
     private fun getFirstMove(fmMode: Int): Token {
@@ -80,7 +81,6 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
         game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
         updateMoveInfo()
         updateMovesCounter()
-        game_ui.resetTimer()
     }
 
     private fun setModeInfo() {
@@ -90,6 +90,11 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
             2 -> game_ui.setModeInfo("MEDIUM")
             3 -> game_ui.setModeInfo("HARD")
         }
+    }
+
+    fun onResumeGame() {
+        if (!game.isGameOver())
+            game_ui.startTimer()
     }
 
     fun restartGame() {
@@ -118,6 +123,7 @@ class GamePresenter(private val game_ui: GameListener, fmMode: Int, boardSizeMod
             register.recoverLastState()
             game_ui.setBoard(game.getGameBoardCopy().getValuesMatrix())
             movesCounter--
+            if (gameMode > 0) movesCounter--
             updateMovesCounter()
         }
     }

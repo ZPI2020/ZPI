@@ -15,6 +15,7 @@ class ActivityGame : AppCompatActivity(), PositionClickedListener, GamePresenter
 
     private var presenter: GamePresenter? = null
     var sec_timer=0
+    var timerOn = false
     var timer = object: CountDownTimer(3600000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             sec_timer+=1000
@@ -47,9 +48,15 @@ class ActivityGame : AppCompatActivity(), PositionClickedListener, GamePresenter
 
     override fun onStart() {
         super.onStart()
-        presenter?.startGame()
         presenter?.refreshWiningLine()
+        presenter?.onResumeGame()
     }
+
+    override fun onStop() {
+        super.onStop()
+        stopTimer()
+    }
+
     override fun resetTimer() {
         sec_timer = 0
         timer.cancel()
@@ -59,6 +66,15 @@ class ActivityGame : AppCompatActivity(), PositionClickedListener, GamePresenter
 
     override fun stopTimer() {
         timer.cancel()
+        timerOn = false
+    }
+
+    override fun startTimer() {
+        if (!timerOn) {
+            timer.cancel()
+            timer.start()
+            timerOn = true
+        }
     }
 
     override fun onPositionClicked(x: Int, y: Int) {
